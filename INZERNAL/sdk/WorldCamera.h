@@ -3,6 +3,8 @@
 #include <core/gt.h>
 #include <core/utils.h>
 
+//WorldRenderer::GetTileMap easy way too it seems
+
 class WorldCamera {
    public:
     CL_Vec2f WorldToScreen(CL_Vec2f& in) {

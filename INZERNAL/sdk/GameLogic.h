@@ -9,6 +9,7 @@ struct __declspec(align(1)) alignas(1) GameLogic {
     NetAvatar* local;
 
    public:
+    //TODO: populate gamelogiccomponent
 
     //this func just gets same member as in struct - in 2.45 that is; position in struct is unureliable so using func
     NetAvatar* GetLocalPlayer() {

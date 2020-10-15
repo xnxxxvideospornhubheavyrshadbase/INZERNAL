@@ -5,6 +5,10 @@ GameLogic* sdk::gamelogic()
 	return detail::get<GameLogic>("E8 ? ? ? ? 8b 17 ? 8d");
 }
 
+WorldTileMap* sdk::tilemap() {
+    return detail::get<WorldTileMap>("E8 ? ? ? ? 44 8B 87 0C 01 00 00");
+}
+
 uintptr_t* sdk::enetclient()
 {
 

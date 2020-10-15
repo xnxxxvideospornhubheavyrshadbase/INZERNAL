@@ -4,11 +4,13 @@
 #include <sdk/GameUpdatePacket.h>
 #include <sdk/NetAvatar.h>
 #include <sdk/AvatarRenderData.h>
+#include <sdk/WorldTileMap.h>
 
 class EnetPeer;
 namespace sdk {
 	GameLogic* gamelogic();
-	uintptr_t* enetclient();
+    WorldTileMap* tilemap();
+	uintptr_t* enetclient(); //TODO: class for enetclient
     EnetPeer* enetpeer();
 
 }

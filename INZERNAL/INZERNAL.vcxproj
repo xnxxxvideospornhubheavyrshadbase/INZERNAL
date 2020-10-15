@@ -118,7 +118,10 @@
     <ClInclude Include="sdk\GameUpdatePacket.h" />
     <ClInclude Include="sdk\NetAvatar.h" />
     <ClInclude Include="sdk\sdk.h" />
+    <ClInclude Include="sdk\Tile.h" />
     <ClInclude Include="sdk\WorldCamera.h" />
+    <ClInclude Include="sdk\WorldRenderer.h" />
+    <ClInclude Include="sdk\WorldTileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="inzernal.def" />
