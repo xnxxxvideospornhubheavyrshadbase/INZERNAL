@@ -1,13 +1,22 @@
 #pragma once
-#include <sdk/NetAvatar.h>
 #include <core/utils.h>
+#include <sdk/NetAvatar.h>
 
-class GameLogic {
-public:
-	NetAvatar* GetLocalPlayer() {
-		//	using GetLocalPlayer_T = NetAvatar * (__cdecl*)(GameLogic*);
-		//	static auto ptr = GetLocalPlayer_T(utils::find_pattern<GetLocalPlayer_T*>("CC 48 8B 81 ?? ?? ?? ?? C3 CC") + byte(1));
-		return *(NetAvatar**)((char*)this + 448);
-		//TODO: better method of getting this !
-	}
+#pragma pack(push, 1)
+
+struct __declspec(align(1)) alignas(1) GameLogic {
+    char pad[448];
+    NetAvatar* local;
+
+   public:
+
+    //this func just gets same member as in struct - in 2.45 that is; position in struct is unureliable so using func
+    NetAvatar* GetLocalPlayer() {
+        static auto ptr = utils::find_pattern<types::GetLocalPlayer>("CC 48 8B 81 ?? ?? ?? ?? C3 CC", true, 1);
+        return ptr(this);
+    }
 };
+
+#pragma pack(pop)
+
+constexpr auto offset = offsetof(GameLogic, local);
