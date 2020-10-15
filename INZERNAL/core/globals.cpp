@@ -36,7 +36,7 @@ namespace global {
 	void*		gt		=	nullptr;	//pointer to growtopia base address
 	bool		load	=	false;		//menu/imgui initialization status
 	bool		draw	=	false;		//menu draw status. set to true for menu to show up when you inject
-	std::string	version	=	"V0.3";		//INZERNAL version
+	std::string	version	=	"V0.4";		//INZERNAL version
 }
 
 // clang-format on
