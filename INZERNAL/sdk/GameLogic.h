@@ -3,8 +3,7 @@
 #include <sdk/NetAvatar.h>
 
 #pragma pack(push, 1)
-
-struct __declspec(align(1)) alignas(1) GameLogic {
+GTClass GameLogic {
     char pad[448];
     NetAvatar* local;
 
@@ -20,4 +19,4 @@ struct __declspec(align(1)) alignas(1) GameLogic {
 
 #pragma pack(pop)
 
-constexpr auto offset = offsetof(GameLogic, local);
+//constexpr auto offset = offsetof(GameLogic, local);

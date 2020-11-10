@@ -5,7 +5,7 @@
 #include <string>
 
 #pragma pack(push, 1)
-struct __declspec(align(1)) alignas(1) NetAvatar { //how fucking annoying it is to get align to work
+GTClass NetAvatar { //how fucking annoying it is to get align to work
    public:
     void* vtable;
     CL_Vec2f m_pos;
@@ -53,10 +53,10 @@ struct __declspec(align(1)) alignas(1) NetAvatar { //how fucking annoying it is 
         *(bool*)(uintptr_t(this) + 378) = supermod;
 
         //for now OnDataConfig for some reason sets 378th bit as true even though if its not, idk why
-        static std::vector<const char*> ondataconfig_patt{ "C7 43 ?? 05 00 00 00 C7 43 ?? 00", "40 0F ?? ?? 83", "0F 95 C0 40" };
+      /*  static std::vector<const char*> ondataconfig_patt{ "C7 43 ?? 05 00 00 00 C7 43 ?? 00", "40 0F ?? ?? 83", "0F 95 C0 40" };
         static auto OnDataConfig = types::OnDataConfig(utils::find_func_has(ondataconfig_patt, 250));
         
-        printf("dataconfig (EXACT): %llx\n", (uintptr_t)OnDataConfig);
+        printf("dataconfig (EXACT): %llx\n", (uintptr_t)OnDataConfig);*/
        /* variantlist_t va{};
         va[0] = uint32_t(mod);
         va[1] = uint32_t(supermod);

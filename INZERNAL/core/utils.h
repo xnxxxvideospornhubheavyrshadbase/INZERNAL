@@ -8,6 +8,9 @@
 #include <sstream>
 #include <string>
 
+//for our dear memory manipulation
+#define GTClass struct __declspec(align(1)) alignas(1) 
+
 namespace utils {
     void attach_console();
     void detach_console();

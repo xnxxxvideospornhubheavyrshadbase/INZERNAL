@@ -263,9 +263,6 @@
     <ClInclude Include="sdk\NetAvatar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdk\WorldCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="hooks\SendPacketRaw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -311,13 +308,19 @@
     <ClInclude Include="menu\imgui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdk\WorldTileMap.h">
+    <ClInclude Include="sdk\world\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdk\Tile.h">
+    <ClInclude Include="sdk\world\Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdk\WorldRenderer.h">
+    <ClInclude Include="sdk\world\WorldCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\world\WorldRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\world\WorldTileMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

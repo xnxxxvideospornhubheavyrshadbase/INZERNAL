@@ -1,8 +1,9 @@
 #pragma once
 #include <proton/variant2.hpp>
+#include <core/utils.h>
 
-
-struct __declspec(align(1)) alignas(1) Tile {
+#pragma pack(push, 1)
+GTClass Tile{
    public:
     int unk;
     __int16 foreground;
@@ -24,13 +25,16 @@ struct __declspec(align(1)) alignas(1) Tile {
     float opacity_maybe;
     char pad[6];
     __int16 backup_flags_maybe;
-    char pad1[48]; //to get to 128 as size (see WorldTileMap::Clear)
-    void set_tile_foreground(short id) {
+    char pad1[61]; //to get to 128 as size (see WorldTileMap::Clear)
+
+    //NOTE: just pushed commit for now, dont use any of these funcs or variables since rn they are outdated and brokken
+    
+  /*  void set_tile_foreground(short id) {
         static auto address = detail::get_call<settileforeground_t>("cd e8 ? ? ? ? 41 bf 0f", 1);
         address(this, id);
     }
 
-    void set_text(textmanager_t* manager, const std::string& str, unsigned int background, unsigned int border, CL_Vec2f pos) {
+    void set_text(textmanager_t * manager, const std::string& str, unsigned int background, unsigned int border, CL_Vec2f pos) {
         auto text = manager->add_text(this, str);
         text->position = pos;
         text->set_color(background, border);
@@ -52,7 +56,7 @@ struct __declspec(align(1)) alignas(1) Tile {
         if (!world || !this)
             return true;
         return func(this, uid, world, true);
-    }
+    }*/
     CL_Vec2f get_pos_at_world() {
         return CL_Vec2f{ (float)this->position_x * 32.f, (float)this->position_y * 32.f };
     }
@@ -60,3 +64,6 @@ struct __declspec(align(1)) alignas(1) Tile {
         return CL_Vec2i{ this->position_x, this->position_y };
     }
 };
+#pragma pack(pop)
+static_assert(sizeof(Tile) == 128 + 8, "wrong tile size!");
+constexpr auto tilelen = sizeof(Tile);
