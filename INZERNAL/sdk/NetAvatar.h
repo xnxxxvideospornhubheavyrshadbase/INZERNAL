@@ -3,25 +3,29 @@
 #include <proton/clanlib/vec2.h>
 #include <proton/variant2.hpp>
 #include <string>
+#include <sdk/EntityComponent.h>
 
 #pragma pack(push, 1)
 GTClass NetAvatar { //how fucking annoying it is to get align to work
    public:
     void* vtable;
-    CL_Vec2f m_pos;
-    CL_Vec2f m_size;
-    CL_Vec2f m_pos2;
+    CL_Vec2f pos;
+    CL_Vec2f size;
+    CL_Vec2f pos_enc; //use this one for local
+    CL_Vec2f size_enc;
     std::string name;
-    int netid;
+    int64_t netid;
+    EntityComponent* entitycomponent;
+    void* unk2;
 
     void set_pos(const CL_Vec2f& n) {
         set_pos(n.x, n.y);
     }
     void set_pos(float x, float y) {
-        m_pos.x = x;
-        m_pos.y = y;
-        m_pos2.x = x / 6.5999999;
-        m_pos2.y = y / 1.3;
+        pos.x = x;
+        pos.y = y;
+        pos_enc.x = x / 6.5999999;
+        pos_enc.y = y / 1.3;
     }
     void set_pos_at_tile(int x, int y) {
         set_pos(x * 32 + 8, y * 32);
@@ -30,19 +34,20 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
     //for local only
     CL_Vec2f get_pos() {
         //returning the encrypted one cuz its 100% what the server has
-        return CL_Vec2f(m_pos2.x * 6.5999999f, m_pos2.y * 1.3f);
+        return CL_Vec2f(pos_enc.x * 6.5999999f, pos_enc.y * 1.3f);
     }
     void set_size(const CL_Vec2f& n) {
         set_size(n.x, n.y);
     }
     void set_size(float x, float y) {
-        m_size.x = x;
-        m_size.y = y;
+        size.x = x;
+        size.y = y;
+        size_enc.x = x / 6.5999999;
+        size_enc.y = y / 1.3;
     }
 
-    //for local only
     CL_Vec2f get_size() {
-        return m_size;
+        return size;
     }
 
     void SetModStatus(bool mod, bool supermod) {
@@ -67,4 +72,4 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
 #pragma pack(pop)
 
 //for debugging purposes, feel free to use offsetof to match in CE or IDA
-constexpr auto offset = offsetof(NetAvatar, name);
+constexpr auto offset = offsetof(NetAvatar, unk2);

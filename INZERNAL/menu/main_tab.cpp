@@ -7,8 +7,12 @@ void menu::main_tab() {
 	
     if (ImGui::Button("SDK test")) {
         auto tilemap = sdk::tilemap();
-        printf("tiles: %d\n", tilemap->tiles.size());
-       /* if (tilemap)
-            printf("%d\n", tilemap->GetTileSafe(5, 24)->foreground);*/
+      
+        if (tilemap) {
+            printf("tiles: %d\n", tilemap->tiles.size());
+            auto tile = tilemap->GetTileSafe(5, 24);
+            printf("%d %d\n", tile->position_x, tile->position_y);
+        }
+          
     }
 }

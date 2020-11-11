@@ -114,6 +114,7 @@
     <ClInclude Include="proton\VariantDB.h" />
     <ClInclude Include="proton\vector2.hpp" />
     <ClInclude Include="sdk\AvatarRenderData.h" />
+    <ClInclude Include="sdk\EntityComponent.h" />
     <ClInclude Include="sdk\GameLogic.h" />
     <ClInclude Include="sdk\GameUpdatePacket.h" />
     <ClInclude Include="sdk\NetAvatar.h" />

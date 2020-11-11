@@ -9,8 +9,8 @@ GTClass Tile{
     __int16 foreground;
     __int16 background;
     __int16 flags;
-    char position_x;
-    char position_y;
+    __int8 position_x;
+    __int8 position_y;
     short unk3;
     short texture_pos;
     short texture_pos_bg;
@@ -65,5 +65,7 @@ GTClass Tile{
     }
 };
 #pragma pack(pop)
+
+//extremely important because we have raw std::vector in tilemap for tiles.
 static_assert(sizeof(Tile) == 128 + 8, "wrong tile size!");
 constexpr auto tilelen = sizeof(Tile);

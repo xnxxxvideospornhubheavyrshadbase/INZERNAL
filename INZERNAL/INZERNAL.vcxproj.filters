@@ -323,6 +323,9 @@
     <ClInclude Include="sdk\world\WorldTileMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sdk\EntityComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="inzernal.def">
