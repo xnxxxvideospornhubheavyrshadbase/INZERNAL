@@ -6,6 +6,7 @@
 #include <core/utils.h>
 #include <hooks\hooks.h>
 #include <process.h>
+#include <core/sigs.hpp>
 
 bool unload_done = false;
 void on_exit() {
@@ -35,6 +36,8 @@ void on_inject() {
 
     printf("Base address: 0x%llx\n", (uintptr_t)global::gt);
     utils::seed_random();
+    sigs::init();
+
     if (!gt::patch_banbypass())
         on_exit();
 

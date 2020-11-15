@@ -55,16 +55,9 @@ std::string gt::get_random_flag() {
 
 bool gt::patch_banbypass() {
     try {
-        static auto banbypass = utils::find_pattern("00 3B C1 75 ? 85 C9", false) + 3;
-        if (banbypass <= 0x3) //did not find ban bypass, checking if its already patched
-        {
-            banbypass = utils::find_pattern("00 3B C1 90 90 85 C9") + 3;
-            if (banbypass <= 0x3) //did not find it being even patched, throw error
-                throw std::runtime_error("could not find ban bypass");
-
-            printf("ban bypass already patched\n");
-            return true;
-        }
+        static auto banbypass = sigs::get(sig::banbypass);
+        if (!banbypass) //did not find ban bypass
+            throw std::runtime_error("could not find ban bypass");
 
         auto bypassed = utils::patch_bytes<2>(banbypass, "\x90\x90");
         if (!bypassed)

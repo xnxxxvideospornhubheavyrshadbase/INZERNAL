@@ -15,8 +15,5 @@ void menu::main_tab() {
         }
           
     }
-    auto local = sdk::gamelogic()->GetLocalPlayer();
-    uintptr_t locat = (uintptr_t)local;
-    printf("%llx %d\n", locat, local->emotion);
 
 }

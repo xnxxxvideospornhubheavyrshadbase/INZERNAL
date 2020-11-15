@@ -7,6 +7,7 @@
 #include <random>
 #include <sstream>
 #include <string>
+#include <core/sigs.hpp>
 
 //for our dear memory manipulation
 #define GTClass struct __declspec(align(1)) alignas(1) 
@@ -89,52 +90,6 @@ namespace utils {
         return t(0);
     }
 
-    template <typename t = uintptr_t>
-    t find_pattern_mod(void* hmod, const char* pat) {
-        static auto pat2byt = [](const char* pat) {
-            std::vector<int> bytes{};
-            auto start = (char*)pat;
-            auto end = start + strlen(pat);
-
-            for (auto curr = start; curr < end; ++curr) {
-                if (*curr == '?') {
-                    ++curr;
-                    if (*curr == '?')
-                        ++curr;
-                    bytes.push_back(-1);
-                }
-                else
-                    bytes.push_back(strtoul(curr, &curr, 16));
-            }
-            return bytes;
-        };
-
-        auto nthdrs = PIMAGE_NT_HEADERS(uintptr_t(hmod) + PIMAGE_DOS_HEADER(hmod)->e_lfanew);
-        auto opthdr = &nthdrs->OptionalHeader;
-        auto start = uintptr_t(hmod) + opthdr->BaseOfCode;
-        auto end = opthdr->SizeOfCode;
-        auto bytes = pat2byt(pat);
-        size_t patsize = bytes.size();
-        auto data = bytes.data();
-        auto found = false;
-        if (!start || !end || patsize < 1)
-            return t(0x0);
-        for (size_t i = start; i <= start + end; i++) {
-            for (size_t j = 0; j < patsize; j++) {
-                if (*((PBYTE)i + j) == data[j] || data[j] == -1)
-                    found = true;
-                else {
-                    found = false;
-                    break;
-                }
-            }
-            if (found)
-                return t(i);
-        }
-        printf("a pattern has not been found: %s\n", pat);
-        return t(0);
-    }
-
     int random(int min, int max);
     void seed_random();
 
@@ -161,10 +116,8 @@ namespace utils {
 namespace detail {
     template <typename t = void*(__cdecl*)()>
     __forceinline t get_call(uintptr_t call) {
-        if (call < 15) {
-            printf("[failsafe] get_call got too small address.\n");
+        if (call < 15) 
             return t();
-        }
         auto offset = *(int32_t*)(call + 1);
         return t(call + offset + 0x5);
     }

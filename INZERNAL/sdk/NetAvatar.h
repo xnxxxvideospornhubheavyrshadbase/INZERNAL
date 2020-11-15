@@ -84,4 +84,4 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
 #pragma pack(pop)
 
 //for debugging purposes, feel free to use offsetof to match in CE or IDA
-constexpr auto offset = offsetof(NetAvatar, unk);
+constexpr auto offset = offsetof(NetAvatar, unk1);

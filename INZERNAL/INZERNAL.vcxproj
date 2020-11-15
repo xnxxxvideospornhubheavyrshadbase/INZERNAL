@@ -28,6 +28,7 @@
     <ClCompile Include="core\minhook\hook.c" />
     <ClCompile Include="core\minhook\trampoline.c" />
     <ClCompile Include="core\miniz\miniz.c" />
+    <ClCompile Include="core\sigs.cpp" />
     <ClCompile Include="core\utils.cpp" />
     <ClCompile Include="hooks\hooks.cpp" />
     <ClCompile Include="menu\imgui\imgui.cpp" />
@@ -71,6 +72,7 @@
     <ClInclude Include="core\minhook\trampoline.h" />
     <ClInclude Include="core\miniz\miniz.h" />
     <ClInclude Include="core\nlhomann\json.hpp" />
+    <ClInclude Include="core\sigs.hpp" />
     <ClInclude Include="core\utils.h" />
     <ClInclude Include="hooks\hooks.h" />
     <ClInclude Include="hooks\SendPacket.h" />

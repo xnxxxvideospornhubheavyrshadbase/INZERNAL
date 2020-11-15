@@ -6,6 +6,7 @@
 #include <sdk/NetAvatar.h>
 #include <sdk/world/WorldRenderer.h>
 #include <sdk/world/WorldTileMap.h>
+#include <core/sigs.hpp>
 
 class EnetPeer;
 namespace sdk {
