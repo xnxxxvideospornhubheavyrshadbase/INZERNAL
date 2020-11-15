@@ -16,7 +16,19 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
     std::string name;
     int64_t netid;
     EntityComponent* entitycomponent;
-    void* unk2;
+    void* unk0;
+    byte unk1;
+    byte facing_left;
+    char unk2[106];
+    float unk3;
+    uint32_t unk4;
+    bool unk5;
+    char unk6[55];
+    int emotion;
+    char unk7[8];
+    void* NetControllerLocal;
+    void* AvatarPacketReceiver;
+    void* AvatarPacketSender;
 
     void set_pos(const CL_Vec2f& n) {
         set_pos(n.x, n.y);
@@ -72,4 +84,4 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
 #pragma pack(pop)
 
 //for debugging purposes, feel free to use offsetof to match in CE or IDA
-constexpr auto offset = offsetof(NetAvatar, unk2);
+constexpr auto offset = offsetof(NetAvatar, unk);
