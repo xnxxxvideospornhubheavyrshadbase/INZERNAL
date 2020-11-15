@@ -9,7 +9,7 @@ class WorldCamera {
    public:
     CL_Vec2f WorldToScreen(CL_Vec2f& in) {
         CL_Vec2f out;
-        static auto func = types::WorldToScreen(detail::get_call("00 e8 ? ? ? ? 49 8b ? ? 41 ? 00 04", 1));
+        static auto func = types::WorldToScreen(sigs::get(sig::world2screen));
         func(this, out, in);
         return out;
     }

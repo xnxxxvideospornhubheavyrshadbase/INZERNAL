@@ -8,7 +8,7 @@ GTClass WorldTileMap {
    private:
     void* vftable;
     CL_Vec2i size;
-    char pad0[8]; //OTOD: probaly 2 4-byte variable here, or 1 8-byte variable
+    char pad0[8]; //TODO: probaly 2 4-byte variable here, or 1 8-byte variable
 
    public:
     std::vector<Tile> tiles;

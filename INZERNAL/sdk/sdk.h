@@ -11,8 +11,6 @@
 class EnetPeer;
 namespace sdk {
     GameLogic* gamelogic();
-    WorldTileMap* tilemap();
-    WorldRenderer* renderer();
     uintptr_t* enetclient(); //TODO: class for enetclient
     EnetPeer* enetpeer();
 

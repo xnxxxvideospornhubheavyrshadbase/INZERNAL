@@ -3,25 +3,26 @@
 #include <vector>
 
 namespace sig {
-    enum  : int {
+    enum : int {
         banbypass = 0,
         gamelogic = 1,
-        worldtilemap,
-        worldrenderer,
-        world2screen
+        world2screen,
+        getlocalplayer,
+        enetclient,
+
+
     };
 
     namespace type {
         enum : int {
             direct, //utils::find_pattern
-            fstart,   //utils::find_func_start
+            fstart, //utils::find_func_start
             call,   //detail::get_call
-            dynamic //detail::get
             //leaving out some unused methods (like utils::find_func_end) of getting these for now
         };
     }
-   
-}
+
+} // namespace sig
 
 namespace sigs {
     extern std::vector<uintptr_t> database;

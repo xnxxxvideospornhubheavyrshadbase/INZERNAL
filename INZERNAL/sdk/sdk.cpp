@@ -1,22 +1,12 @@
 #include <sdk/sdk.h>
 
 GameLogic* sdk::gamelogic() {
-    static auto address = (GameLogic * (__cdecl*)())sigs::get(sig::gamelogic);
-    return address();
-}
-
-WorldTileMap* sdk::tilemap() {
-    static auto address = (WorldTileMap * (__cdecl*)())sigs::get(sig::worldtilemap);
-    return address();
-}
-
-WorldRenderer* sdk::renderer() {
-    static auto address = (WorldRenderer * (__cdecl*)())sigs::get(sig::worldrenderer);
+    static auto address = (GameLogic * (__cdecl*)()) sigs::get(sig::gamelogic);
     return address();
 }
 
 uintptr_t* sdk::enetclient() {
-    static auto client = detail::get_call<uintptr_t*(__cdecl*)()>("E8 ? ? ? ? 45 ? ? 89 ? ? ? 48 8D ? ? 48", 0);
+    static auto client = (uintptr_t * (__cdecl*)()) sigs::get(sig::enetclient);
     return client();
 }
 
