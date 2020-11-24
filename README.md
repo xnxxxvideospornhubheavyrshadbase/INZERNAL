@@ -47,11 +47,10 @@
 
 ### Verified compatible Growtopia versions
 * Some patterns might be outdated for some versions
+* For now going to stick to **V3.45** with spoofing to latest version, I suggest using the
 * Find version binaries [here](https://github.com/ama6nen/INZERNAL/tree/main/gt)
 * Verified working Growtopia versions are
-  * V.45 (Recommended version)
-  * V.41
-  * V3.39
+  * V3.45 (Recommended version)
 
 # 
 
