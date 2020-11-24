@@ -64,7 +64,7 @@ void hooks::init() {
 
 	//this is where all the function signatures are 
 	auto
-		App_GetVersion                  = utils::find_func_start("28 FF 15 ?? ?? ?? ?? FF 15"),
+		App_GetVersion                  = sigs::get(sig::app_getversion),
 		BaseApp_SetFPSLimit             = utils::find_func_start("00 00 0F 57 C0 0F 2F C8 72"),
 		LogMsg                          = utils::find_func_start("00 28 00 00 45"),
 		CanMessageT4                    = detail::get_call("48 8b ce e8 ? ? ? ? 84 c0 74 ? e8", 3),
@@ -215,16 +215,16 @@ bool __cdecl hooks::ObjectMap_HandlePacket(WorldObjectMap* map, GameUpdatePacket
     return orig::ObjectMap_HandlePacket(map, packet);
 }
 
-void __cdecl hooks::SendPacketRaw(int type, GameUpdatePacket* packet, int size, void* ext, EnetPeer* peer, int flag) {
-    SendPacketRawHook::Execute(orig::SendPacketRaw, type, packet, size, ext, peer, flag);
+void __cdecl hooks::SendPacketRaw(int type, GameUpdatePacket* packet, int size, void* packetsender, EnetPeer* peer, int flag) {
+    SendPacketRawHook::Execute(orig::SendPacketRaw, type, packet, size, packetsender, peer, flag);
 }
 
 void __cdecl hooks::HandleTouch(LevelTouchComponent* touch, CL_Vec2f pos, bool started) {
     if (opt::tp_click && GetAsyncKeyState(VK_CONTROL)) {
         //localplayer is guaranteed to be a valid pointer here according to xrefs
-        auto local = sdk::gamelogic()->GetLocalPlayer();
-        auto new_pos = pos - (local->get_size() / 2.f);
-        local->set_pos(new_pos);
+        auto local = sdk::GetGameLogic()->GetLocalPlayer();
+        auto new_pos = pos - (local->GetSize() / 2.f);
+        local->SetPos(new_pos);
         pos = new_pos;
     }
     else

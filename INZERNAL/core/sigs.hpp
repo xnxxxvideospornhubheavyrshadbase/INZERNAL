@@ -9,7 +9,17 @@ namespace sig {
         world2screen,
         getlocalplayer,
         enetclient,
-
+        app_getversion,
+        baseapp_setfpslimit,
+        logmsg,
+        canmessaget4,
+        canpunchorbuildnow,
+        objectmap_handlepacket,
+        sendpacketraw,
+        handletouch,
+        worldcamera_onupdate,
+        updatefromnetavatar,
+        sendpacket
 
     };
 

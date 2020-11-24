@@ -57,10 +57,10 @@ GTClass Tile{
             return true;
         return func(this, uid, world, true);
     }*/
-    CL_Vec2f get_pos_at_world() {
+    CL_Vec2f GetPosAtWorld() {
         return CL_Vec2f{ (float)this->position_x * 32.f, (float)this->position_y * 32.f };
     }
-    CL_Vec2i get_pos() {
+    CL_Vec2i GetPos() {
         return CL_Vec2i{ this->position_x, this->position_y };
     }
 };

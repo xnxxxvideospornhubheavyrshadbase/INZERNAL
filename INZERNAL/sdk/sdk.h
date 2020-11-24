@@ -10,8 +10,8 @@
 
 class EnetPeer;
 namespace sdk {
-    GameLogic* gamelogic();
-    uintptr_t* enetclient(); //TODO: class for enetclient
-    EnetPeer* enetpeer();
+    GameLogic* GetGameLogic();
+    uintptr_t* GetClient(); //TODO: class for enetclient
+    EnetPeer* GetPeer();
 
 } // namespace sdk

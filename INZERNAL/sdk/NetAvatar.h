@@ -30,42 +30,42 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
     void* AvatarPacketReceiver;
     void* AvatarPacketSender;
 
-    void set_pos(const CL_Vec2f& n) {
-        set_pos(n.x, n.y);
+    //TODO: somehow differentiate between local and others so you can use SetPos, GetPos for other players too
+    //(since they dont use encrypted coords too)
+
+    void SetPos(const CL_Vec2f& n) {
+        SetPos(n.x, n.y);
     }
-    void set_pos(float x, float y) {
+    void SetPos(float x, float y) {
         pos.x = x;
         pos.y = y;
         pos_enc.x = x / 6.5999999;
         pos_enc.y = y / 1.3;
     }
-    void set_pos_at_tile(int x, int y) {
-        set_pos(x * 32 + 8, y * 32);
+    void SetPosAtTile(int x, int y) {
+        SetPos(x * 32 + 8, y * 32);
     }
 
     //for local only
-    CL_Vec2f get_pos() {
+    CL_Vec2f GetPos() {
         //returning the encrypted one cuz its 100% what the server has
         return CL_Vec2f(pos_enc.x * 6.5999999f, pos_enc.y * 1.3f);
     }
-    void set_size(const CL_Vec2f& n) {
-        set_size(n.x, n.y);
+    void SetSize(const CL_Vec2f& n) {
+        SetSize(n.x, n.y);
     }
-    void set_size(float x, float y) {
+    void SetSize(float x, float y) {
         size.x = x;
         size.y = y;
         size_enc.x = x / 6.5999999;
         size_enc.y = y / 1.3;
     }
 
-    CL_Vec2f get_size() {
+    CL_Vec2f GetSize() {
         return size;
     }
 
     void SetModStatus(bool mod, bool supermod) {
-
-      
-       // *(bool*)(uintptr_t(this) + 376) = mod; //invis
         *(bool*)(uintptr_t(this) + 377) = mod;
         *(bool*)(uintptr_t(this) + 378) = supermod;
 

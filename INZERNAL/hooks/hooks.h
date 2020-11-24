@@ -48,7 +48,7 @@ namespace hooks {
 	bool	__cdecl		NetAvatar_CanMessageT4(NetAvatar* player);
 	bool	__cdecl		CanPunchOrBuildNow(AvatarRenderData* render_data);
 	bool	__cdecl		ObjectMap_HandlePacket(WorldObjectMap* map, GameUpdatePacket* packet);
-	void	__cdecl		SendPacketRaw(int type, GameUpdatePacket* packet, int size, void* ext, EnetPeer* peer, int flag);
+	void	__cdecl		SendPacketRaw(int type, GameUpdatePacket* packet, int size, void* packetsender, EnetPeer* peer, int flag);
 	void	__cdecl		HandleTouch(LevelTouchComponent* touch, CL_Vec2f pos, bool started);
     void    __cdecl     WorldCamera_OnUpdate(WorldCamera* camera, CL_Vec2f unk, CL_Vec2f unk2);
     void    __cdecl     UpdateFromNetAvatar(AvatarRenderData* render_data, NetAvatar* player);

@@ -26,14 +26,27 @@ uintptr_t sigs::add_pattern(std::string name, std::string pattern, int type, int
     return address;
 }
 void sigs::init() {
-    auto bp = add_pattern("ban bypass", "00 3B C1 75 ? 85 C9", sig::type::direct, 3, true);
+   
+    auto bp = add_pattern("gt.cpp/patch_banbypass", "00 3B C1 75 ? 85 C9", sig::type::direct, 3, true);
     if (!bp) //will be invalid if ban bypass already patched, so we are doing this.
-        add_pattern("ban bypass", "00 3B C1 90 90 85 C9", sig::type::direct, 3);
+        add_pattern("gt.cpp/patch_banbypass", "00 3B C1 90 90 85 C9", sig::type::direct, 3);
 
-    add_pattern("gamelogic", "E8 ? ? ? ? 8b 17 ? 8d", sig::type::call);
-    add_pattern("world to screen", "00 e8 ? ? ? ? 49 8b ? ? 41 ? 00 04", sig::type::call, 1);
-    add_pattern("get local player", "CC 48 8B 81 ?? ?? ?? ?? C3 CC", sig::type::direct, 1);
-    add_pattern("enet client", "E8 ? ? ? ? 45 ? ? 89 ? ? ? 48 8D ? ? 48", sig::type::call);
+    add_pattern("sdk.cpp/GetGameLogic", "E8 ? ? ? ? 8b 17 ? 8d", sig::type::call);
+    add_pattern("WorldCamera.h/WorldToScreen", "00 e8 ? ? ? ? 49 8b ? ? 41 ? 00 04", sig::type::call, 1);
+    add_pattern("GameLogic.h/GetLocalPlayer", "CC 48 8B 81 ?? ?? ?? ?? C3 CC", sig::type::direct, 1);
+    add_pattern("sdk.cpp/GetClient", "E8 ? ? ? ? 45 ? ? 89 ? ? ? 48 8D ? ? 48", sig::type::call);
+
+    //all hooks.cpp
+    add_pattern("hooks.cpp/App::GetVersion", "28 FF 15 ?? ?? ?? ?? FF 15", sig::type::fstart);
+    add_pattern("hooks.cpp/BaseApp::SetFPSLimit", "00 00 0F 57 C0 0F 2F C8 72", sig::type::fstart);
+    add_pattern("hooks.cpp/LogMsg", "00 28 00 00 45", sig::type::fstart);
+    add_pattern("hooks.cpp/CanMessageT4", "48 8b ce e8 ? ? ? ? 84 c0 74 ? e8", sig::type::call, 3);
+    add_pattern("hooks.cpp/CanPunchOrBuildNow", "00 00 83 e9 03 74 ? 83 e9 01 74 ? 83 e9 01", sig::type::fstart);
+    add_pattern("hooks.cpp/ObjectMap::HandlePacket", "44 8B ?? ?? 41 83 f8 FF 75 ?? 44", sig::type::fstart);
+ /*   add_pattern("hooks.cpp/", "", sig::type::fstart);
+    add_pattern("hooks.cpp/", "", sig::type::fstart);
+    add_pattern("hooks.cpp/", "", sig::type::fstart);
+    add_pattern("hooks.cpp/", "", sig::type::fstart);*/
 
     size_t invalid = 0;
     for (auto sig : database) {

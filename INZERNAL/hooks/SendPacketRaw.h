@@ -5,14 +5,14 @@
 
 class SendPacketRawHook {
    public:
-    static void Execute(types::SendPacketRaw orig, int type, GameUpdatePacket* packet, int size, void* ext, EnetPeer* peer, int flag) {
+    static void Execute(types::SendPacketRaw orig, int type, GameUpdatePacket* packet, int size, void* packetsender, EnetPeer* peer, int flag) {
         printf("sending raw packet with type %d\n", packet->type);
 
         if (packet->type == PACKET_APP_INTEGRITY_FAIL)
             return;
 
         if (packet->type == 0 && packet->flags & 4) {
-            auto player = sdk::gamelogic()->GetLocalPlayer();
+            auto player = sdk::GetGameLogic()->GetLocalPlayer();
             if (player)
                 player->SetModStatus(opt::mod_zoom, opt::cheat::dev_zoom);
         }
@@ -27,11 +27,11 @@ class SendPacketRawHook {
             pk.velocity_x = 1000.f; //gravity
             pk.velocity_y = 250.f;  // movement speed
 
-            int anybody = 0;
-            orig(NET_MESSAGE_GAME_PACKET, &pk, 56, &anybody, sdk::enetpeer(), flag);
+            void* PacketSender = nullptr;
+            orig(NET_MESSAGE_GAME_PACKET, &pk, 56, PacketSender, sdk::GetPeer(), flag);
             return;
         }
 
-        orig(type, packet, size, ext, peer, flag);
+        orig(type, packet, size, packetsender, peer, flag);
     }
 };

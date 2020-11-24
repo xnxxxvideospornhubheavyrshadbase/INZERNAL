@@ -12,7 +12,7 @@ GTClass WorldTileMap {
 
    public:
     std::vector<Tile> tiles;
-    CL_Vec2i& world_size() {
+    CL_Vec2i& WorldSize() {
         return size;
     }
     //make own func instead of calling, to verify our tiles are correct!
