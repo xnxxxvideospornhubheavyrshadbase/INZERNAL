@@ -19,9 +19,6 @@ uintptr_t sigs::add_pattern(std::string name, std::string pattern, int type, int
         address = 0;
     }
 
-    if (name.find("tilemap") != -1)
-        printf("%llx\n", address);
-
     database.push_back(address);
     return address;
 }
@@ -43,10 +40,11 @@ void sigs::init() {
     add_pattern("hooks.cpp/CanMessageT4", "48 8b ce e8 ? ? ? ? 84 c0 74 ? e8", sig::type::call, 3);
     add_pattern("hooks.cpp/CanPunchOrBuildNow", "00 00 83 e9 03 74 ? 83 e9 01 74 ? 83 e9 01", sig::type::fstart);
     add_pattern("hooks.cpp/ObjectMap::HandlePacket", "44 8B ?? ?? 41 83 f8 FF 75 ?? 44", sig::type::fstart);
- /*   add_pattern("hooks.cpp/", "", sig::type::fstart);
-    add_pattern("hooks.cpp/", "", sig::type::fstart);
-    add_pattern("hooks.cpp/", "", sig::type::fstart);
-    add_pattern("hooks.cpp/", "", sig::type::fstart);*/
+    add_pattern("hooks.cpp/SendPacketRaw", "00 81 FE 40 42 0F 00", sig::type::fstart);
+    add_pattern("hooks.cpp/HandleTouch", "83 B8 ?? ?? ?? ?? 12 75", sig::type::fstart);
+    add_pattern("hooks.cpp/WorldCamera_OnUpdate", "89 43 10 0f 2f", sig::type::fstart);
+    add_pattern("hooks.cpp/UpdateFromNetAvatar", "32 21 00 00 66 39", sig::type::fstart);
+    add_pattern("hooks.cpp/SendPacket", "02 00 00 00 e8 ? ? ? ? 90 48 8d 4c 24 50", sig::type::call, 4);
 
     size_t invalid = 0;
     for (auto sig : database) {

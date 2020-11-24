@@ -62,19 +62,18 @@ void hooks::init() {
     // clang-format off
 
 
-	//this is where all the function signatures are 
 	auto
 		App_GetVersion                  = sigs::get(sig::app_getversion),
-		BaseApp_SetFPSLimit             = utils::find_func_start("00 00 0F 57 C0 0F 2F C8 72"),
-		LogMsg                          = utils::find_func_start("00 28 00 00 45"),
-		CanMessageT4                    = detail::get_call("48 8b ce e8 ? ? ? ? 84 c0 74 ? e8", 3),
-		CanPunchOrBuildNow              = utils::find_func_start("00 00 83 e9 03 74 ? 83 e9 01 74 ? 83 e9 01"),
-		ObjectMap_HandlePacket          = utils::find_func_start("44 8B ?? ?? 41 83 f8 FF 75 ?? 44"),
-		SendPacketRaw                   = utils::find_func_start("00 81 FE 40 42 0F 00"),
-		HandleTouch                     = utils::find_func_start("83 B8 ?? ?? ?? ?? 12 75"),
-        WorldCamera_OnUpdate            = utils::find_func_start("89 43 10 0f 2f"),
-        UpdateFromNetAvatar             = utils::find_func_start("32 21 00 00 66 39"),
-        SendPacket                      = detail::get_call("02 00 00 00 e8 ? ? ? ? 90 48 8d 4c 24 50", 4);
+		BaseApp_SetFPSLimit             = sigs::get(sig::baseapp_setfpslimit),
+		LogMsg                          = sigs::get(sig::logmsg),
+		CanMessageT4                    = sigs::get(sig::canmessaget4),
+		CanPunchOrBuildNow              = sigs::get(sig::canpunchorbuildnow),
+		ObjectMap_HandlePacket          = sigs::get(sig::objectmap_handlepacket),
+		SendPacketRaw                   = sigs::get(sig::sendpacketraw),
+		HandleTouch                     = sigs::get(sig::handletouch),
+        WorldCamera_OnUpdate            = sigs::get(sig::worldcamera_onupdate),
+        UpdateFromNetAvatar             = sigs::get(sig::updatefromnetavatar),
+        SendPacket                      = sigs::get(sig::sendpacket);
 
     MH_CreateHook(LPVOID(vtable[42]), EndScene, (void**)(&orig::EndScene));
 	MAKEHOOK(App_GetVersion);
