@@ -8,6 +8,7 @@ void menu::main_tab() {
 
     ImGui::Text("gamelogic: %llx", sdk::GetGameLogic());
     ImGui::Text("tilemap: %llx", sdk::GetGameLogic()->GetTileMap());
+    ImGui::Text("world: %llx", sdk::GetGameLogic()->GetWorld());
     ImGui::Text("renderer: %llx", sdk::GetGameLogic()->GetWorldRenderer());
     ImGui::Text("enetclient: %llx", sdk::GetClient());
 
@@ -15,8 +16,8 @@ void menu::main_tab() {
         auto tilemap = sdk::GetGameLogic()->GetTileMap();
 
         if (tilemap) {
-            printf("tiles: %d\n", tilemap->tiles.size());
-            auto tile = tilemap->GetTileSafe(5, 24);
+            printf("tiles: %d %d %d\n", tilemap->size.x, tilemap->size.y, tilemap->tiles.size());
+           auto tile = tilemap->GetTileSafe(5, 24);
             printf("%d %d\n", tile->position_x, tile->position_y);
         }
     }

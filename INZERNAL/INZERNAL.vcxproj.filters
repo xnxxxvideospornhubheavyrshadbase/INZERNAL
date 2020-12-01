@@ -332,6 +332,12 @@
     <ClInclude Include="core\sigs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sdk\world\WorldObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\world\WorldObjectMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="inzernal.def">

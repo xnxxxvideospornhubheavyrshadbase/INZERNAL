@@ -124,6 +124,8 @@
     <ClInclude Include="sdk\world\Tile.h" />
     <ClInclude Include="sdk\world\World.h" />
     <ClInclude Include="sdk\world\WorldCamera.h" />
+    <ClInclude Include="sdk\world\WorldObject.h" />
+    <ClInclude Include="sdk\world\WorldObjectMap.h" />
     <ClInclude Include="sdk\world\WorldRenderer.h" />
     <ClInclude Include="sdk\world\WorldTileMap.h" />
   </ItemGroup>

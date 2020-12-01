@@ -1,20 +1,22 @@
 #pragma once
 #include <core/utils.h>
-
-class WorldTileMap;
+#include <sdk/world/WorldTileMap.h>
+#include <sdk/world/WorldObjectMap.h>
 
 #pragma pack(push, 1)
 GTClass World { //TODO: literally load offline worlds with World::LoadFromMem, would be kinda epic
    public:
     void* vtable;
-    short version; //our latest known ver is 15
+    byte unk1;
+    byte unk2;
+    short version;
     char pad1[4]; //TODO: find out what this is
-    WorldTileMap* TileMap;
-    char pad2[50]; //TODO: find out what this is
-    void* WorldObjectMap;
+    WorldTileMap tilemap;
+    WorldObjectMap worldobjectmap;
+    std::string name;
     //padding
     //world object map
 };
 #pragma pack(pop)
 
-constexpr auto objmap = offsetof(World, WorldObjectMap);
+constexpr auto objmap = offsetof(World, worldobjectmap);

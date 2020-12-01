@@ -1,6 +1,7 @@
 #pragma once
 #include <core/utils.h>
 #include <sdk/NetAvatar.h>
+#include <sdk/world/World.h>
 
 class WorldRenderer;
 class WorldTileMap;
@@ -8,7 +9,7 @@ class WorldTileMap;
 #pragma pack(push, 1)
 GTClass GameLogic {
     char pad[304];
-    uintptr_t tilemap; //dont use, see GetTileMap
+    World* world;
     WorldRenderer* renderer;
     char pad2[128];
     NetAvatar* local;
@@ -24,17 +25,15 @@ GTClass GameLogic {
 
      //render + tilemap offsets have not changed since 2.996, probably safe to use struct
     WorldTileMap* GetTileMap() {
-        if (!IsTileMapValid())
-            return nullptr; //gt returns 16 if invalid but we should never need null tilemaps, only for ptr check
-
-        return (WorldTileMap*)(tilemap + 16);
-    }
-    //for some reason gt doesnt directly use this but adds 16 to the value, so if tilemap is null, the real val from GetTileMap is still 16, i.e not null
-    bool IsTileMapValid() { 
-        return tilemap > 0;
+        if (!world)
+            return nullptr; 
+        return &world->tilemap; // (WorldTileMap*)(tilemap + 16);
     }
     WorldRenderer* GetWorldRenderer() { 
         return renderer;
+    }
+    World* GetWorld() {
+        return world;
     }
    /* WorldCamera* GetWorldCamera() {
     }*/
@@ -42,4 +41,4 @@ GTClass GameLogic {
 
 #pragma pack(pop)
 
-constexpr auto offset2 = offsetof(GameLogic, local);
+constexpr auto offset2 = offsetof(GameLogic, renderer);

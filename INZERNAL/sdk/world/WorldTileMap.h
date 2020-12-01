@@ -3,15 +3,19 @@
 #include <sdk/NetAvatar.h>
 #include <sdk/world/Tile.h>
 
+class World;
+
 #pragma pack(push, 1)
 GTClass WorldTileMap {
-   private:
+   public:
     void* vftable;
     CL_Vec2i size;
     char pad0[8]; //TODO: probaly 2 4-byte variable here, or 1 8-byte variable
 
    public:
     std::vector<Tile> tiles;
+    World* world;
+
     CL_Vec2i& WorldSize() {
         return size;
     }
@@ -26,3 +30,5 @@ GTClass WorldTileMap {
 };
 
 #pragma pack(pop)
+
+constexpr auto testoffset = offsetof(WorldTileMap, pad0);
