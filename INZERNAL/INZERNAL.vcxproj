@@ -75,6 +75,7 @@
     <ClInclude Include="core\sigs.hpp" />
     <ClInclude Include="core\utils.h" />
     <ClInclude Include="hooks\hooks.h" />
+    <ClInclude Include="hooks\ProcessTankUpdatePacket.h" />
     <ClInclude Include="hooks\SendPacket.h" />
     <ClInclude Include="hooks\SendPacketRaw.h" />
     <ClInclude Include="menu\imgui\imconfig.h" />

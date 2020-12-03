@@ -45,6 +45,7 @@ void sigs::init() {
     add_pattern("hooks.cpp/WorldCamera_OnUpdate", "89 43 10 0f 2f", sig::type::fstart);
     add_pattern("hooks.cpp/UpdateFromNetAvatar", "32 21 00 00 66 39", sig::type::fstart);
     add_pattern("hooks.cpp/SendPacket", "02 00 00 00 e8 ? ? ? ? 90 48 8d 4c 24 50", sig::type::call, 4);
+    add_pattern("hooks.cpp/ProcessTankUpdatePacket", "83 78 04 71 75 ? 49", sig::type::fstart);
 
     size_t invalid = 0;
     for (auto sig : database) {

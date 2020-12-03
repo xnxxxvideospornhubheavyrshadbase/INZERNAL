@@ -43,10 +43,11 @@ namespace types {
 	using	ObjectMap_HandlePacket		= bool(__cdecl*)(WorldObjectMap*, GameUpdatePacket*);
 	using	SendPacketRaw				= void(__cdecl*)(int, GameUpdatePacket*, int, void*, EnetPeer*, int);
 	using	SendPacket					= void(__cdecl*)(int, const std::string&, EnetPeer*);
-	using	HandleTouch					= void(__cdecl*)( LevelTouchComponent*, CL_Vec2f, bool);
+	using	HandleTouch					= void(__cdecl*)(LevelTouchComponent*, CL_Vec2f, bool);
 	using	WorldCamera_OnUpdate		= void(__cdecl*)(WorldCamera*, CL_Vec2f, CL_Vec2f);
 	using	UpdateFromNetAvatar			= void(__cdecl*)(AvatarRenderData*, NetAvatar*);
 	using	EndScene					= long(__stdcall*)(IDirect3DDevice9*);
+	using	ProcessTankUpdatePacket		= void(__cdecl*)(GameLogic*, GameUpdatePacket*);
 
 	//other functions, not hooked
 	using	WorldToScreen				= void(__cdecl*)(WorldCamera*, CL_Vec2f&, CL_Vec2f&);
@@ -86,6 +87,7 @@ namespace opt {
 	extern float		fps_limit;
 	extern bool			tp_click;
 	extern bool			mod_zoom;
+	extern bool			see_ghosts;
 	extern bool			spoof_login;
 	extern bool			spoof_name;
 	extern WinSpoof		spoof_win;

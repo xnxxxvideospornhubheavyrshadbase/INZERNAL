@@ -19,7 +19,8 @@ namespace sig {
         handletouch,
         worldcamera_onupdate,
         updatefromnetavatar,
-        sendpacket
+        sendpacket,
+        processtankupdatepacket
 
     };
 

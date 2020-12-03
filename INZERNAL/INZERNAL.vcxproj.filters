@@ -338,6 +338,9 @@
     <ClInclude Include="sdk\world\WorldObjectMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="hooks\ProcessTankUpdatePacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="inzernal.def">

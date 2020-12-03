@@ -2,8 +2,9 @@
 #include <core/gt.h>
 #include <core/utils.h>
 #include <hooks/hooks.h>
-#include <hooks\SendPacket.h>
-#include <hooks\SendPacketRaw.h>
+#include <hooks/SendPacket.h>
+#include <hooks/SendPacketRaw.h>
+#include <hooks/ProcessTankUpdatePacket.h>
 #include <intrin.h>
 #include <menu\menu.h>
 #include <sdk/sdk.h>
@@ -11,6 +12,7 @@
 #include <windows.h>
 #include <iomanip>
 #include <thread>
+
 
 #define ORIGINAL(x) types::x hooks::orig::##x{};
 #define MAKEHOOK(x) MH_CreateHook(LPVOID(##x), hooks::##x, (void**)(&orig::##x));
@@ -27,6 +29,7 @@ ORIGINAL(HandleTouch);
 ORIGINAL(WorldCamera_OnUpdate);
 ORIGINAL(UpdateFromNetAvatar);
 ORIGINAL(SendPacket);
+ORIGINAL(ProcessTankUpdatePacket);
 ORIGINAL(EndScene);
 
 WNDPROC hooks::orig::wndproc; //wndproc is special case
@@ -73,7 +76,8 @@ void hooks::init() {
 		HandleTouch                     = sigs::get(sig::handletouch),
         WorldCamera_OnUpdate            = sigs::get(sig::worldcamera_onupdate),
         UpdateFromNetAvatar             = sigs::get(sig::updatefromnetavatar),
-        SendPacket                      = sigs::get(sig::sendpacket);
+        SendPacket                      = sigs::get(sig::sendpacket),
+        ProcessTankUpdatePacket         = sigs::get(sig::processtankupdatepacket);
 
     MH_CreateHook(LPVOID(vtable[42]), EndScene, (void**)(&orig::EndScene));
 	MAKEHOOK(App_GetVersion);
@@ -87,6 +91,7 @@ void hooks::init() {
     MAKEHOOK(WorldCamera_OnUpdate);
     MAKEHOOK(UpdateFromNetAvatar);
     MAKEHOOK(SendPacket);
+    MAKEHOOK(ProcessTankUpdatePacket);
 
 	orig::wndproc = WNDPROC(SetWindowLongPtrW(global::hwnd, -4, LONG_PTR(WndProc)));
 
@@ -244,6 +249,10 @@ void __cdecl hooks::UpdateFromNetAvatar(AvatarRenderData* render_data, NetAvatar
 
 void __cdecl hooks::SendPacket(int type, const std::string& packet, EnetPeer* peer) {
     SendPacketHook::Execute(orig::SendPacket, type, packet, peer);
+}
+
+void __cdecl hooks::ProcessTankUpdatePacket(GameLogic* logic, GameUpdatePacket* packet) {
+    ProcessTankUpdatePacketHook::Execute(orig::ProcessTankUpdatePacket, logic, packet);
 }
 
 long __stdcall hooks::EndScene(IDirect3DDevice9* device) {
