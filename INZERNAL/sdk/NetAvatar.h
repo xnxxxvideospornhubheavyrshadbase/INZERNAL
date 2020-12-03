@@ -29,6 +29,10 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
     void* NetControllerLocal;
     void* AvatarPacketReceiver;
     void* AvatarPacketSender;
+    char unk8[148];
+    float gravity;
+    char unk9[8];
+    float gravity_verify;
 
     //TODO: somehow differentiate between local and others so you can use SetPos, GetPos for other players too
     //(since they dont use encrypted coords too)
@@ -84,4 +88,5 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
 #pragma pack(pop)
 
 //for debugging purposes, feel free to use offsetof to match in CE or IDA
-constexpr auto offset = offsetof(NetAvatar, unk1);
+constexpr auto offset = offsetof(NetAvatar, gravity);
+

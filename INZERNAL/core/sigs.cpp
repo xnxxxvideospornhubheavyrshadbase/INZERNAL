@@ -37,7 +37,7 @@ void sigs::init() {
     add_pattern("hooks.cpp/App::GetVersion", "28 FF 15 ?? ?? ?? ?? FF 15", sig::type::fstart);
     add_pattern("hooks.cpp/BaseApp::SetFPSLimit", "00 00 0F 57 C0 0F 2F C8 72", sig::type::fstart);
     add_pattern("hooks.cpp/LogMsg", "00 28 00 00 45", sig::type::fstart);
-    add_pattern("hooks.cpp/CanMessageT4", "48 8b ce e8 ? ? ? ? 84 c0 74 ? e8", sig::type::call, 3);
+    add_pattern("hooks.cpp/NetAvatar::CanMessageT4", "48 8b ce e8 ? ? ? ? 84 c0 74 ? e8", sig::type::call, 3);
     add_pattern("hooks.cpp/CanPunchOrBuildNow", "00 00 83 e9 03 74 ? 83 e9 01 74 ? 83 e9 01", sig::type::fstart);
     add_pattern("hooks.cpp/ObjectMap::HandlePacket", "44 8B ?? ?? 41 83 f8 FF 75 ?? 44", sig::type::fstart);
     add_pattern("hooks.cpp/SendPacketRaw", "00 81 FE 40 42 0F 00", sig::type::fstart);
@@ -47,6 +47,7 @@ void sigs::init() {
     add_pattern("hooks.cpp/SendPacket", "02 00 00 00 e8 ? ? ? ? 90 48 8d 4c 24 50", sig::type::call, 4);
     add_pattern("hooks.cpp/ProcessTankUpdatePacket", "83 78 04 71 75 ? 49", sig::type::fstart);
     add_pattern("hooks.cpp/CanSeeGhosts", "04 00 00 00 e8 ? ? ? ? 8b c8 e8", sig::type::call, 11);
+    add_pattern("hooks.cpp/NetAvatar::Gravity", "B9 CA 27 00 00", sig::type::fstart);
 
     size_t invalid = 0;
     for (auto sig : database) {

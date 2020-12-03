@@ -49,6 +49,7 @@ namespace types {
 	using	EndScene					= long(__stdcall*)(IDirect3DDevice9*);
 	using	ProcessTankUpdatePacket		= void(__cdecl*)(GameLogic*, GameUpdatePacket*);
 	using	CanSeeGhosts				= bool(__cdecl*)(int);
+	using	NetAvatar_Gravity			= void(__cdecl*)(NetAvatar*);
 
 	//other functions, not hooked
 	using	WorldToScreen				= void(__cdecl*)(WorldCamera*, CL_Vec2f&, CL_Vec2f&);
@@ -99,6 +100,8 @@ namespace opt {
 		extern bool		punch_cooldown_on;
 		extern float	punch_cooldown_val;
 		extern bool		dev_zoom;
+		extern bool		gravity_on;
+		extern float	gravity_val;
 	}
 	
 }

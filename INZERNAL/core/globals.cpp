@@ -24,6 +24,8 @@ namespace opt {
 		bool	punch_cooldown_on	=	true;	//toggle: punch cooldown
 		float	punch_cooldown_val	=	0.15f;	//punch cooldown timer. i.e fast punch
 		bool	dev_zoom			=	false;	//unlimited zoom + unlimited build/punch. The latter can ban, use at your own caution.
+		bool	gravity_on			=	false;  //toggle: use custom gravity
+		float	gravity_val			=	1000.0f; //the gravity, 1000 is normal
 	}
 	
 }

@@ -21,8 +21,8 @@ namespace sig {
         updatefromnetavatar,
         sendpacket,
         processtankupdatepacket,
-        canseeghosts
-
+        canseeghosts,
+        gravity
     };
 
     namespace type {

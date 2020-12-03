@@ -1,10 +1,10 @@
 #pragma once
 #include <core/gt.h>
 #include <core/utils.h>
-#include <hooks/hooks.h>
+#include <hooks/ProcessTankUpdatePacket.h>
 #include <hooks/SendPacket.h>
 #include <hooks/SendPacketRaw.h>
-#include <hooks/ProcessTankUpdatePacket.h>
+#include <hooks/hooks.h>
 #include <intrin.h>
 #include <menu\menu.h>
 #include <sdk/sdk.h>
@@ -12,7 +12,6 @@
 #include <windows.h>
 #include <iomanip>
 #include <thread>
-
 
 #define ORIGINAL(x) types::x hooks::orig::##x{};
 #define MAKEHOOK(x) MH_CreateHook(LPVOID(##x), hooks::##x, (void**)(&orig::##x));
@@ -31,6 +30,7 @@ ORIGINAL(UpdateFromNetAvatar);
 ORIGINAL(SendPacket);
 ORIGINAL(ProcessTankUpdatePacket);
 ORIGINAL(CanSeeGhosts);
+ORIGINAL(NetAvatar_Gravity);
 ORIGINAL(EndScene);
 
 WNDPROC hooks::orig::wndproc; //wndproc is special case
@@ -79,7 +79,8 @@ void hooks::init() {
         UpdateFromNetAvatar             = sigs::get(sig::updatefromnetavatar),
         SendPacket                      = sigs::get(sig::sendpacket),
         ProcessTankUpdatePacket         = sigs::get(sig::processtankupdatepacket),
-        CanSeeGhosts                    = sigs::get(sig::canseeghosts);
+        CanSeeGhosts                    = sigs::get(sig::canseeghosts),
+        NetAvatar_Gravity               = sigs::get(sig::gravity);
 
     MH_CreateHook(LPVOID(vtable[42]), EndScene, (void**)(&orig::EndScene));
 	MAKEHOOK(App_GetVersion);
@@ -95,6 +96,7 @@ void hooks::init() {
     MAKEHOOK(SendPacket);
     MAKEHOOK(ProcessTankUpdatePacket);
     MAKEHOOK(CanSeeGhosts);
+    MAKEHOOK(NetAvatar_Gravity);
 	orig::wndproc = WNDPROC(SetWindowLongPtrW(global::hwnd, -4, LONG_PTR(WndProc)));
 
     // clang-format on
@@ -261,6 +263,20 @@ bool __cdecl hooks::CanSeeGhosts(int id) {
     if (opt::see_ghosts)
         return true;
     return orig::CanSeeGhosts(id);
+}
+
+void __cdecl hooks::NetAvatar_Gravity(NetAvatar* player) {
+    if (opt::cheat::gravity_on) {
+        float old_grav = player->gravity;
+        float old_grav_ver = player->gravity_verify;
+        player->gravity = opt::cheat::gravity_val * 2;
+        player->gravity_verify = opt::cheat::gravity_val * 2;
+        orig::NetAvatar_Gravity(player);
+        player->gravity = old_grav;
+        player->gravity_verify = old_grav_ver;
+    }
+    else
+        orig::NetAvatar_Gravity(player);
 }
 
 long __stdcall hooks::EndScene(IDirect3DDevice9* device) {
