@@ -30,6 +30,7 @@ ORIGINAL(WorldCamera_OnUpdate);
 ORIGINAL(UpdateFromNetAvatar);
 ORIGINAL(SendPacket);
 ORIGINAL(ProcessTankUpdatePacket);
+ORIGINAL(CanSeeGhosts);
 ORIGINAL(EndScene);
 
 WNDPROC hooks::orig::wndproc; //wndproc is special case
@@ -77,7 +78,8 @@ void hooks::init() {
         WorldCamera_OnUpdate            = sigs::get(sig::worldcamera_onupdate),
         UpdateFromNetAvatar             = sigs::get(sig::updatefromnetavatar),
         SendPacket                      = sigs::get(sig::sendpacket),
-        ProcessTankUpdatePacket         = sigs::get(sig::processtankupdatepacket);
+        ProcessTankUpdatePacket         = sigs::get(sig::processtankupdatepacket),
+        CanSeeGhosts                    = sigs::get(sig::canseeghosts);
 
     MH_CreateHook(LPVOID(vtable[42]), EndScene, (void**)(&orig::EndScene));
 	MAKEHOOK(App_GetVersion);
@@ -92,7 +94,7 @@ void hooks::init() {
     MAKEHOOK(UpdateFromNetAvatar);
     MAKEHOOK(SendPacket);
     MAKEHOOK(ProcessTankUpdatePacket);
-
+    MAKEHOOK(CanSeeGhosts);
 	orig::wndproc = WNDPROC(SetWindowLongPtrW(global::hwnd, -4, LONG_PTR(WndProc)));
 
     // clang-format on
@@ -253,6 +255,12 @@ void __cdecl hooks::SendPacket(int type, const std::string& packet, EnetPeer* pe
 
 void __cdecl hooks::ProcessTankUpdatePacket(GameLogic* logic, GameUpdatePacket* packet) {
     ProcessTankUpdatePacketHook::Execute(orig::ProcessTankUpdatePacket, logic, packet);
+}
+
+bool __cdecl hooks::CanSeeGhosts(int id) {
+    if (opt::see_ghosts)
+        return true;
+    return orig::CanSeeGhosts(id);
 }
 
 long __stdcall hooks::EndScene(IDirect3DDevice9* device) {

@@ -34,6 +34,7 @@ namespace hooks {
         TYPE(SendPacket);
         TYPE(EndScene);
         TYPE(ProcessTankUpdatePacket);
+        TYPE(CanSeeGhosts);
 
         extern WNDPROC wndproc;
     } // namespace orig
@@ -55,6 +56,7 @@ namespace hooks {
     void    __cdecl     UpdateFromNetAvatar(AvatarRenderData* render_data, NetAvatar* player);
     void    __cdecl     SendPacket(int type, const std::string& packet, EnetPeer* peer);
     void    __cdecl     ProcessTankUpdatePacket(GameLogic* logic, GameUpdatePacket* packet);
+    bool    __cdecl     CanSeeGhosts(int id);
     long    __stdcall   EndScene(IDirect3DDevice9* device);
 
 

@@ -46,6 +46,7 @@ void sigs::init() {
     add_pattern("hooks.cpp/UpdateFromNetAvatar", "32 21 00 00 66 39", sig::type::fstart);
     add_pattern("hooks.cpp/SendPacket", "02 00 00 00 e8 ? ? ? ? 90 48 8d 4c 24 50", sig::type::call, 4);
     add_pattern("hooks.cpp/ProcessTankUpdatePacket", "83 78 04 71 75 ? 49", sig::type::fstart);
+    add_pattern("hooks.cpp/CanSeeGhosts", "04 00 00 00 e8 ? ? ? ? 8b c8 e8", sig::type::call, 11);
 
     size_t invalid = 0;
     for (auto sig : database) {

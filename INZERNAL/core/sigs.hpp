@@ -20,7 +20,8 @@ namespace sig {
         worldcamera_onupdate,
         updatefromnetavatar,
         sendpacket,
-        processtankupdatepacket
+        processtankupdatepacket,
+        canseeghosts
 
     };
 

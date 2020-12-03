@@ -48,6 +48,7 @@ namespace types {
 	using	UpdateFromNetAvatar			= void(__cdecl*)(AvatarRenderData*, NetAvatar*);
 	using	EndScene					= long(__stdcall*)(IDirect3DDevice9*);
 	using	ProcessTankUpdatePacket		= void(__cdecl*)(GameLogic*, GameUpdatePacket*);
+	using	CanSeeGhosts				= bool(__cdecl*)(int);
 
 	//other functions, not hooked
 	using	WorldToScreen				= void(__cdecl*)(WorldCamera*, CL_Vec2f&, CL_Vec2f&);
