@@ -6,6 +6,9 @@
 class SendPacketRawHook {
    public:
     static void Execute(types::SendPacketRaw orig, int type, GameUpdatePacket* packet, int size, void* packetsender, EnetPeer* peer, int flag) {
+        if (opt::cheat::block_sendpacketraw)
+            return;
+
         printf("sending raw packet with type %d\n", packet->type);
 
         if (packet->type == PACKET_APP_INTEGRITY_FAIL)

@@ -102,6 +102,7 @@ namespace opt {
 		extern bool		dev_zoom;
 		extern bool		gravity_on;
 		extern float	gravity_val;
+		extern bool		block_sendpacketraw;
 	}
 	
 }
