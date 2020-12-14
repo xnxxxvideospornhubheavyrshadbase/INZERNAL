@@ -9,6 +9,7 @@ void menu::main_tab() {
             ImGui::Checkbox("Enable", &opt::cheat::punch_cooldown_on);
             ImGui::SameLine();
             ImGui::SliderFloat("####pcoold", &opt::cheat::punch_cooldown_val, 0.05f, 0.4f, "%0.2f");
+            ImGui::Text("Shouldn't ban but low values will disconnect.");
             ImGui::EndChild();
         }
     }
@@ -17,6 +18,17 @@ void menu::main_tab() {
             ImGui::Checkbox("Enable", &opt::cheat::gravity_on);
             ImGui::SameLine();
             ImGui::SliderFloat("###grav", &opt::cheat::gravity_val, -500.0f, 2000.f, "%0.0f");
+            ImGui::Text("Shouldn't ban except negative/zero gravity when in air for too long.");
+            ImGui::EndChild();
+        }
+    }
+
+     if (ImGui::CollapsingHeader("Custom Server")) {
+        if (ImGui::BeginChild("###customserver", ImVec2(ImGui::GetWindowWidth() * 0.93f, 60.f), true)) {
+            ImGui::Checkbox("Enable", &opt::custom_server_on);
+            ImGui::SameLine();
+            menu::InputTextSTL("##serverval", &opt::custom_server_val);
+            ImGui::Text("You can connect to private servers with this too.");
             ImGui::EndChild();
         }
     }

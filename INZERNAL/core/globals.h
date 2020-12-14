@@ -15,6 +15,7 @@
 #include <d3d9.h>
 #include <proton/Variant.h>
 #include <proton/clanlib/vec2.h>
+#include <proton/NetHTTP.h>
 #include <stdio.h>
 #include <atomic>
 #include <core/json.hpp>
@@ -61,6 +62,7 @@ namespace types {
 	using	ProcessTankUpdatePacket		= void(__cdecl*)(GameLogic*, GameUpdatePacket*);
 	using	CanSeeGhosts				= bool(__cdecl*)(int);
 	using	NetAvatar_Gravity			= void(__cdecl*)(NetAvatar*);
+	using	NetHTTP_Update				= void(__cdecl*)(NetHTTP*);
 
 	//other functions, not hooked
 	using	WorldToScreen				= void(__cdecl*)(WorldCamera*, CL_Vec2f&, CL_Vec2f&);
@@ -106,6 +108,9 @@ namespace opt {
 	extern WinSpoof		spoof_win;
 	extern FlagMode		flag_mode;
 	extern std::string	flag;
+
+	extern bool			custom_server_on;
+	extern std::string	custom_server_val;
 
 	namespace cheat {
 		extern bool		punch_cooldown_on;

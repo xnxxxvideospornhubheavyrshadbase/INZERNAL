@@ -19,6 +19,10 @@ namespace opt {
 	FlagMode	flag_mode	=	::fmRandom; //See FlagMode enum for details.
 	std::string	flag		=	"us";		//set if flag_mode is set to fmCustom
 
+	bool		custom_server_on	=	false;	//when on it uses 
+	std::string	custom_server_val	=	"growtopia2.com"; //you can put your private server ip etc there if you want to
+
+
 	//cheats
 	namespace cheat {
 		bool	punch_cooldown_on	=	true;		//toggle: custom punch/place cooldown

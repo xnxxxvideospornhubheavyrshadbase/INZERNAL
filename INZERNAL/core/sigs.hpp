@@ -22,7 +22,9 @@ namespace sig {
         sendpacket,
         processtankupdatepacket,
         canseeghosts,
-        gravity
+        gravity,
+        nethttp_update,
+        nethttp_start
     };
 
     namespace type {

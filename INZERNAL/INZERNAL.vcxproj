@@ -126,6 +126,7 @@
     <ClInclude Include="proton\Math\rtPlane.h" />
     <ClInclude Include="proton\Math\rtRect.h" />
     <ClInclude Include="proton\MiscUtils.h" />
+    <ClInclude Include="proton\NetHTTP.h" />
     <ClInclude Include="proton\PlatformPrecomp.h" />
     <ClInclude Include="proton\PlatformSetup.h" />
     <ClInclude Include="proton\RTFileFormat.h" />

@@ -15,7 +15,7 @@
 #include <core/minhook/hook.h>
 #include <proton/Variant.h>
 #include <string.h>
-
+#include <proton/NetHTTP.h>
 
 
 #define TYPE(x) extern types::x x
@@ -38,6 +38,7 @@ namespace hooks {
         TYPE(ProcessTankUpdatePacket);
         TYPE(CanSeeGhosts);
         TYPE(NetAvatar_Gravity);
+        TYPE(NetHTTP_Update);
 
         extern WNDPROC wndproc;
     } // namespace orig
@@ -61,6 +62,7 @@ namespace hooks {
     void    __cdecl     ProcessTankUpdatePacket(GameLogic* logic, GameUpdatePacket* packet);
     bool    __cdecl     CanSeeGhosts(int id);
     void    __cdecl     NetAvatar_Gravity(NetAvatar* player);
+    void    __cdecl     NetHTTP_Update(NetHTTP* http);
     long    __stdcall   EndScene(IDirect3DDevice9* device);
 
 

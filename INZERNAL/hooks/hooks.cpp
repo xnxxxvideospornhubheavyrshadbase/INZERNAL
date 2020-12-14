@@ -12,8 +12,6 @@
 #include <iomanip>
 #include <thread>
 
-
-
 #define ORIGINAL(x) types::x hooks::orig::##x{};
 #define MAKEHOOK(x) MH_CreateHook(LPVOID(##x), hooks::##x, (void**)(&orig::##x));
 
@@ -32,6 +30,7 @@ ORIGINAL(SendPacket);
 ORIGINAL(ProcessTankUpdatePacket);
 ORIGINAL(CanSeeGhosts);
 ORIGINAL(NetAvatar_Gravity);
+ORIGINAL(NetHTTP_Update);
 ORIGINAL(EndScene);
 
 WNDPROC hooks::orig::wndproc; //wndproc is special case
@@ -81,7 +80,8 @@ void hooks::init() {
         SendPacket                      = sigs::get(sig::sendpacket),
         ProcessTankUpdatePacket         = sigs::get(sig::processtankupdatepacket),
         CanSeeGhosts                    = sigs::get(sig::canseeghosts),
-        NetAvatar_Gravity               = sigs::get(sig::gravity);
+        NetAvatar_Gravity               = sigs::get(sig::gravity),
+        NetHTTP_Update                  = sigs::get(sig::nethttp_update);
 
     MH_CreateHook(LPVOID(vtable[42]), EndScene, (void**)(&orig::EndScene));
 	MAKEHOOK(App_GetVersion);
@@ -98,6 +98,8 @@ void hooks::init() {
     MAKEHOOK(ProcessTankUpdatePacket);
     MAKEHOOK(CanSeeGhosts);
     MAKEHOOK(NetAvatar_Gravity);
+    MAKEHOOK(NetHTTP_Update);
+
 	orig::wndproc = WNDPROC(SetWindowLongPtrW(global::hwnd, -4, LONG_PTR(WndProc)));
 
     // clang-format on
@@ -278,6 +280,19 @@ void __cdecl hooks::NetAvatar_Gravity(NetAvatar* player) {
     }
     else
         orig::NetAvatar_Gravity(player);
+}
+
+void __cdecl hooks::NetHTTP_Update(NetHTTP* http) {
+    if (http->m_serverName.find("iap-mob.ubi.com") != -1) //block ubisoft iap http spam shit.
+        return;
+    
+    if (opt::custom_server_on && http->m_serverName.find("growtopia") != -1) {
+        //we dont know if its gt1 or gt2
+        utils::replace(http->m_serverName, "growtopia2.com", opt::custom_server_val);
+        utils::replace(http->m_serverName, "growtopia1.com", opt::custom_server_val);
+    }
+
+    orig::NetHTTP_Update(http);
 }
 
 long __stdcall hooks::EndScene(IDirect3DDevice9* device) {
