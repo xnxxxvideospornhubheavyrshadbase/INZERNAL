@@ -134,6 +134,7 @@ namespace opt {
 		extern bool		gravity_on;
 		extern float	gravity_val;
 		extern bool		block_sendpacketraw;
+		extern bool		antighost;
 	}
 	
 }

@@ -14,7 +14,8 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
     CL_Vec2f pos_enc; //use this one for local
     CL_Vec2f size_enc;
     std::string name;
-    int64_t netid;
+    uint32_t netid;
+    uint32_t unk01;
     EntityComponent* entitycomponent;
     void* unk0;
     byte unk1;

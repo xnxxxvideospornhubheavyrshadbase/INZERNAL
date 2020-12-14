@@ -42,6 +42,7 @@ namespace opt {
 		bool	gravity_on			=	false;		//toggle: use custom gravity
 		float	gravity_val			=	1000.0f;	//the gravity, 1000 is normal
 		bool	block_sendpacketraw	=	false;		//blocks any and all sendpacketraw requests. Acts as full ghost. You can safely explore worlds with this on.
+		bool	antighost			=	true;		//ignores ghost effects. doesnt ban, but people can see that you are not affected from ur speed.
 	}
 	
 }

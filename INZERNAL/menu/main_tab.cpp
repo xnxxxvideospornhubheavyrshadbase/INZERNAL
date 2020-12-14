@@ -33,6 +33,7 @@ void menu::main_tab() {
         }
     }
     ImGui::Checkbox("Block sendpacketraw", &opt::cheat::block_sendpacketraw);
+    ImGui::Checkbox("Antighost", &opt::cheat::antighost);
 
     ImGui::Text("gamelogic: %llx", sdk::GetGameLogic());
     ImGui::Text("tilemap: %llx", sdk::GetGameLogic()->GetTileMap());

@@ -284,8 +284,8 @@ void __cdecl hooks::NetAvatar_Gravity(NetAvatar* player) {
 }
 
 void __cdecl hooks::NetHTTP_Update(NetHTTP* http) {
-    //if (http->m_serverName.find("iap-mob.ubi.com") != -1) //block ubisoft iap http spam shit.
-    //    return;
+    if (http->m_serverName.find("iap-mob.ubi.com") != -1) //block ubisoft iap http spam shit.
+       return;
     
     //we dont know if its gt1 or gt2, so lets just do both, fuck the performance.
     if (opt::custom_server_on && http->m_serverName.find("growtopia") != -1) {
