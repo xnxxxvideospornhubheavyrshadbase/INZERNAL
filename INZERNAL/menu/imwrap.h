@@ -9,20 +9,19 @@ struct InputTextCallback_UserData {
     ImGuiInputTextCallback ChainCallback;
     void* ChainCallbackUserData;
 };
-#define ROW_SIZE 30.0f
 
-#define AUTOSIZE(x) ImVec2(ImGui::GetWindowWidth() * 0.93f, ROW_SIZE * x)
+#define BLOCK_SIZE 30.0f
+#define AUTOSIZE(x) ImVec2(ImGui::GetWindowWidth() * 0.93f, BLOCK_SIZE * x)
 
-namespace tabs {
 
-}
 namespace imwrap {
+
 
     void tooltip(const char* tip = nullptr);
     bool inputstring(const char* label, std::string* str, ImGuiInputTextFlags flags = 0, const char* tip = nullptr);
 
-    template <size_t N>
-    void render_horizontal(char* (&names)[N], int& activetab, float w, float h) {
+     template <size_t N>
+    void horizontal_tabs(char* (&names)[N], int& activetab, float w, float h) {
         bool values[N] = { false };
         values[activetab] = true;
         for (int i = 0; i < N; ++i) {
@@ -33,7 +32,7 @@ namespace imwrap {
                 ImGui::SameLine();
         }
     }
-    void tabs::render_labels(float w, float h, bool sameline)
+
     template <typename t>
     bool checkbox(const char* name, const char* label, t& variable, const char* tip = nullptr) {
         bool ret = false;

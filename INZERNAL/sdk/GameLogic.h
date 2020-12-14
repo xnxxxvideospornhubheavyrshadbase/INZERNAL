@@ -27,7 +27,12 @@ GTClass GameLogic {
     WorldTileMap* GetTileMap() {
         if (!world)
             return nullptr; 
-        return &world->tilemap; // (WorldTileMap*)(tilemap + 16);
+        return &world->tilemap; 
+    }
+    WorldObjectMap* GetObjectMap() {
+        if (!world)
+            return nullptr;
+        return &world->worldobjectmap;
     }
     WorldRenderer* GetWorldRenderer() { 
         return renderer;

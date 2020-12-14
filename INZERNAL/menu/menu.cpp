@@ -51,17 +51,35 @@ void menu::EndScene(IDirect3DDevice9* device, bool active) {
         ImGui::NewFrame();
 
         ImGui::SetNextWindowPos(ImVec2{ 0, 0 }, ImGuiCond_Once);
-        ImGui::SetNextWindowSize(ImVec2{ 600, 400 }, ImGuiCond_Once);
+        ImGui::SetNextWindowSize(ImVec2{ 800, 400 }, ImGuiCond_Once);
 
         if (global::draw && ImGui::Begin(std::string("INZERNAL " + global::version).c_str(), &global::draw, ImGuiWindowFlags_NoCollapse)) {
-            if (ImGui::BeginTabBar("##tabs", ImGuiTabBarFlags_None)) {
-                if (ImGui::BeginTabItem("Main")) {
-                    main_tab();
-                    ImGui::EndTabItem();
-                }
-                ImGui::EndTabBar();
-            }
+           
+            	static char* tab_names[] = { (char*)"Enhancements", (char*)"Cheats", (char*)"Framework" };
+            static int active_tab = 0;
 
+            auto& style = ImGui::GetStyle();
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, style.WindowPadding.y });
+
+            float group_w = ImGui::GetCurrentWindow()->Size.x - style.WindowPadding.x * 2;
+            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 10));
+            {
+                ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.f);
+                imwrap::horizontal_tabs(tab_names, active_tab, group_w / _countof(tab_names), 33.0f);
+            }
+            ImGui::PopStyleVar(3);
+
+            switch (active_tab) {
+                case 0: 
+                    enhancements_tab();
+                    break;
+                case 1: 
+                    cheats_tab();
+                    break;
+                case 2: 
+                    framework_tab();
+                    break;
+            }
             ImGui::End();
         }
         ImGui::EndFrame();

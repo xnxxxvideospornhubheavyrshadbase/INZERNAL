@@ -11,7 +11,7 @@ GTClass Tile{
     __int16 flags;
     __int8 position_x;
     __int8 position_y;
-    short unk3;
+    short world_pos; //basically if pos is 8, 17 then this value is 817
     short texture_pos;
     short texture_pos_bg;
     char pad0[6];

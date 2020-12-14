@@ -1,10 +1,8 @@
 #pragma once
 #include <menu/menu.h>
 #include <sdk/sdk.h>
-void menu::main_tab() {
-    ImGui::Text("Menu will be updated in later versions.");
 
-    ImGui::ToggleButton("test", &opt::cheat::punch_cooldown_on, ImVec2{ 50, 25 }, 0);
+void menu::enhancements_tab() {
     if (ImGui::CollapsingHeader("Punch/build cooldown changer")) {
         if (ImGui::BeginChild("###cooldownchanger", ImVec2(ImGui::GetWindowWidth() * 0.93f, 60.f), true)) {
             ImGui::Checkbox("Enable###punch", &opt::cheat::punch_cooldown_on);
@@ -45,8 +43,6 @@ void menu::main_tab() {
     }
 
     ImGui::Columns(3);
-    //ImGui::SetColumnWidth(0, ImGui::GetWindowWidth() * 0.365f);
-
 
     ImGui::Checkbox("Block sendpacketraw", &opt::cheat::block_sendpacketraw);
     ImGui::Checkbox("Antighost", &opt::cheat::antighost);
@@ -58,50 +54,14 @@ void menu::main_tab() {
     ImGui::Checkbox("Dev zoom", &opt::cheat::dev_zoom);
     ImGui::Checkbox("TP on click (CTRL)", &opt::tp_click);
 
+  //TODO: clean up enhancements and cheats, sort them out and add missing options
+
     ImGui::NextColumn();
 
     ImGui::Checkbox("Spoof login info", &opt::spoof_login);
-
+    if (imwrap::checkbox("Use Alt Server", opt::alt_server, "Always uses the alternative server, which fixes the issues of freezing upon logon")) {
+        *(bool*)((uintptr_t)global::gt + 0x5EA071) = opt::alt_server; //very ghetto, but theres no way to sig this
+    }
     ImGui::EndColumns();
 
-    ImGui::Text("gamelogic: %llx", sdk::GetGameLogic());
-    ImGui::Text("tilemap: %llx", sdk::GetGameLogic()->GetTileMap());
-    ImGui::Text("world: %llx", sdk::GetGameLogic()->GetWorld());
-    ImGui::Text("renderer: %llx", sdk::GetGameLogic()->GetWorldRenderer());
-    auto client = sdk::GetClient();
-    if (client) {
-        ImGui::Text("enetclient: %llx", client);
-        ImGui::Text("peer: %llx, host %llx", client->peer, client->host);
-        ImGui::InputInt("tracking_tick", &client->tracking_tick);
-        ImGui::InputInt("conn_status", &client->conn_status);
-        ImGui::InputInt("another_timer", &client->another_timer);
-
-        /*   if (client->connection_timer < 1)
-            client->connection_timer = 1;*/
-    }
-
-    if (ImGui::Button("SDK test")) {
-        auto tilemap = sdk::GetGameLogic()->GetTileMap();
-
-        if (tilemap) {
-            printf("tiles: %d %d %zd\n", tilemap->size.x, tilemap->size.y, tilemap->tiles.size());
-            auto tile = tilemap->GetTileSafe(5, 24);
-            printf("%d %d\n", (int)tile->position_x, (int)tile->position_y);
-        }
-    }
-    ImGui::SameLine();
-    if (ImGui::Button("Get fz/zf of fz.exe")) {
-        uint32_t size{};
-        auto file = utils::read_file("fz.exe", size);
-
-        if (!file)
-            printf("File fz.exe does not exist!\n");
-        else {
-            auto fz = size;
-            auto zf = HashString((const char*)file, size);
-
-            printf("fz: %d, zf: %d\n", fz, zf);
-            free(file);
-        }
-    }
 }

@@ -101,6 +101,9 @@ void hooks::init() {
 	orig::wndproc = WNDPROC(SetWindowLongPtrW(global::hwnd, -4, LONG_PTR(WndProc)));
 
     // clang-format on
+    
+    
+    *(bool*)((uintptr_t)global::gt + 0x5EA071) = opt::alt_server;
 
     MH_EnableHook(MH_ALL_HOOKS);
     utils::printc("93", "Hooks have been setup!");

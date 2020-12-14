@@ -123,6 +123,7 @@ namespace opt {
 	extern WinSpoof		spoof_win;
 	extern FlagMode		flag_mode;
 	extern std::string	flag;
+	extern bool			alt_server;
 
 	extern bool			custom_server_on;
 	extern std::string	custom_server_val;

@@ -30,6 +30,7 @@ namespace opt {
 	WinSpoof	spoof_win	=	::wsMimic;	//Mode of zf/fz spoofing mode. See the WinSpoof enum for more details.
 	FlagMode	flag_mode	=	::fmRandom; //See FlagMode enum for details.
 	std::string	flag		=	"us";		//set if flag_mode is set to fmCustom
+	bool		alt_server	=	true;		//always use alternative server for login, because growtopia1 (main logon server) has issues with freezing.
 
 	bool		custom_server_on	=	false;	//when on it uses 
 	std::string	custom_server_val	=	"growtopia2.com"; //you can put your private server ip etc there if you want to

@@ -11,7 +11,7 @@
 
 //for our dear memory manipulation
 #define GTClass struct __declspec(align(1)) alignas(1) 
-
+#define SPLIT_IP(addr) (uint8_t)(addr), (uint8_t)(addr >> 8), (uint8_t)(addr >> 16), (uint8_t)(addr >> 24)
 
 
 namespace utils {

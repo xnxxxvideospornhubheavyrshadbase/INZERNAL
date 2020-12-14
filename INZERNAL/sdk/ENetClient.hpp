@@ -5,15 +5,18 @@
 #pragma pack(push, 1)
 GTClass ENetClient {
    public:
-    char unk1[192];
+    char unk0[192];
     ENetHost* host;
     ENetPeer* peer;
     int connection_timer;
     int tracking_tick;
     int conn_status;
     int another_timer;
+    std::string address;
+    int port;
+    int unk;
+    int token;
+    int user; //this is also your userid
 };
 
 #pragma pack(pop)
-
-constexpr auto offset22 = offsetof(ENetClient, connection_timer);
