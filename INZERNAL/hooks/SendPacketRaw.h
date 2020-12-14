@@ -13,9 +13,9 @@ class SendPacketRawHook {
             utils::printc("95", "Was going to send a packet about app integrity failure, but we blocked it.");
             return;
         }
-           
 
-        printf("sending raw packet with type: %d [%s]\n", packet->type, gt::get_type_string(packet->type).c_str());
+        if (logging::enabled && logging::console & logging::sendpacketraw)
+            printf("sending raw packet: %d [%s]\n", packet->type, gt::get_type_string(packet->type).c_str());
 
         if (packet->type == 0 && packet->flags & 4) {
             auto player = sdk::GetGameLogic()->GetLocalPlayer();

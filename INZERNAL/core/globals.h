@@ -96,6 +96,21 @@ namespace col {
 	im gt_to_im(int gt);
 }
 
+namespace logging {
+
+		enum { 
+			 sendpacket = (1 << 0), //the text of the packet
+			 sendpacketraw = (1 << 1), //just the type, not the full info
+			 processtank = (1 << 2), //just the type, not the full info
+			 callfunction = (1 << 3), //processtankupdatepacket CALL_FUNCTION serializes as variantlist
+			 logmsg	= (1 << 4), //LogMsg function
+		 };
+
+		extern bool	enabled;
+		extern int console;
+		extern int max_count;
+		extern int menu;	
+}
 
 namespace opt {
 	extern float		gt_version;

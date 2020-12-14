@@ -12,6 +12,9 @@ class SendPacketHook {
         if (type == NET_MESSAGE_CLIENT_LOG_RESPONSE) //dont send crash log to gt.
             return;
 
+        if (logging::enabled && logging::console & logging::sendpacket)
+            printf("sending text packet: %d [%s]\n", type, packet.c_str());
+
         if (packet.find("game_version|") != -1 && opt::spoof_login) {
             auto var = RTVar::parse(packet);
             auto mac = gt::generate_mac();
@@ -34,7 +37,6 @@ class SendPacketHook {
                 var.set("zf", "-128084874");
             }
 
-
             if (opt::flag_mode == FlagMode::fmRandom)
                 var.set("country", gt::get_random_flag());
             else if (opt::flag_mode == FlagMode::fmCustom)
@@ -47,7 +49,6 @@ class SendPacketHook {
                 var.set("requestedName", utils::rnd(utils::random(4, 10)));
 
             packet = var.serialize();
-            printf("%s\n", packet.c_str());
         }
 
         orig(type, packet, peer);

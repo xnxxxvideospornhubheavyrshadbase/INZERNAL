@@ -1,8 +1,20 @@
 #pragma once
 #include "globals.h"
 
-
 // clang-format off
+
+
+//logging options
+namespace logging {
+		bool	enabled		= true; //master switch for all logging
+	
+		//logging in console
+		int		console		=	sendpacketraw | processtank | callfunction;
+
+		//logging in menu
+		int		max_count	=	500;  //max events in menu, for performance concerns.
+		int		menu		=	sendpacket | sendpacketraw | processtank | callfunction;
+}
 
 //options
 namespace opt {
@@ -21,7 +33,6 @@ namespace opt {
 
 	bool		custom_server_on	=	false;	//when on it uses 
 	std::string	custom_server_val	=	"growtopia2.com"; //you can put your private server ip etc there if you want to
-
 
 	//cheats
 	namespace cheat {
