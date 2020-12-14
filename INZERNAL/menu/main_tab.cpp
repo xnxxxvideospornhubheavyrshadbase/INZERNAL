@@ -6,7 +6,7 @@ void menu::main_tab() {
 
     if (ImGui::CollapsingHeader("Punch/build cooldown changer")) {
         if (ImGui::BeginChild("###cooldownchanger", ImVec2(ImGui::GetWindowWidth() * 0.93f, 60.f), true)) {
-            ImGui::Checkbox("Enable", &opt::cheat::punch_cooldown_on);
+            ImGui::Checkbox("Enable###punch", &opt::cheat::punch_cooldown_on);
             ImGui::SameLine();
             ImGui::SliderFloat("####pcoold", &opt::cheat::punch_cooldown_val, 0.05f, 0.4f, "%0.2f");
             ImGui::Text("Shouldn't ban but low values will disconnect.");
@@ -15,7 +15,7 @@ void menu::main_tab() {
     }
     if (ImGui::CollapsingHeader("Gravity changer")) {
         if (ImGui::BeginChild("###gravitychanger", ImVec2(ImGui::GetWindowWidth() * 0.93f, 60.f), true)) {
-            ImGui::Checkbox("Enable", &opt::cheat::gravity_on);
+            ImGui::Checkbox("Enable###grav", &opt::cheat::gravity_on);
             ImGui::SameLine();
             ImGui::SliderFloat("###grav", &opt::cheat::gravity_val, -500.0f, 2000.f, "%0.0f");
             ImGui::Text("Shouldn't ban except negative/zero gravity when in air for too long.");
@@ -25,7 +25,7 @@ void menu::main_tab() {
 
      if (ImGui::CollapsingHeader("Custom Server")) {
         if (ImGui::BeginChild("###customserver", ImVec2(ImGui::GetWindowWidth() * 0.93f, 60.f), true)) {
-            ImGui::Checkbox("Enable", &opt::custom_server_on);
+            ImGui::Checkbox("Enable###custom", &opt::custom_server_on);
             ImGui::SameLine();
             menu::InputTextSTL("##serverval", &opt::custom_server_val);
             ImGui::Text("You can connect to private servers with this too.");

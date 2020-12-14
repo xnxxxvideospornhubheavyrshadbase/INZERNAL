@@ -39,8 +39,6 @@ IDirect3DDevice9* device = nullptr;
 bool canrender = false;
 
 void hooks::init() {
-    utils::unprotect_process();
-
     global::hwnd = FindWindowA(nullptr, "Growtopia");
 
     const auto base = global::gt;
@@ -128,8 +126,9 @@ float __cdecl hooks::App_GetVersion(App* app) {
     if (!global::app) {
         global::app = app;
         orig::BaseApp_SetFPSLimit((BaseApp*)app, opt::fps_limit);
+        utils::unprotect_process();
         utils::printc("93", "Modified FPS limit!");
-    };
+    }
     float version = opt::gt_version;
     static float real_ver = orig::App_GetVersion(app);
     if (real_ver > version) //dont spoof if we are running newer client. internal might just be outdated, avoid recompilation.
@@ -285,8 +284,8 @@ void __cdecl hooks::NetAvatar_Gravity(NetAvatar* player) {
 }
 
 void __cdecl hooks::NetHTTP_Update(NetHTTP* http) {
-    if (http->m_serverName.find("iap-mob.ubi.com") != -1) //block ubisoft iap http spam shit.
-        return;
+    //if (http->m_serverName.find("iap-mob.ubi.com") != -1) //block ubisoft iap http spam shit.
+    //    return;
     
     //we dont know if its gt1 or gt2, so lets just do both, fuck the performance.
     if (opt::custom_server_on && http->m_serverName.find("growtopia") != -1) {

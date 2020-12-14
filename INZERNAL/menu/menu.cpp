@@ -30,6 +30,7 @@ void menu::EndScene(IDirect3DDevice9* device, bool active) {
                     main_tab();
                     ImGui::EndTabItem();
                 }
+                ImGui::EndTabBar();
             }
 
             ImGui::End();
