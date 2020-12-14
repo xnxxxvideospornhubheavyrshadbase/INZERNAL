@@ -33,8 +33,8 @@ class SendPacketHook {
                 var.set("zf", std::to_string(utils::random(INT_MIN, INT_MAX)));
             }
             else if (opt::spoof_win == WinSpoof::wsMimic) { //win-specific file values, mismatching is logged as fake windows.
-                var.set("fz", "6427816");                   //last update: 2.945
-                var.set("zf", "-128084874");
+                var.set("fz", "7013544");                   //last update: 2.950
+                var.set("zf", "-1553185796");
             }
 
             if (opt::flag_mode == FlagMode::fmRandom)

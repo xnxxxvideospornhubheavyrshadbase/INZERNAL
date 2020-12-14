@@ -156,6 +156,9 @@
     <ClCompile Include="enet\win32.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="menu\imwrap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\globals.h">
@@ -399,6 +402,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="proton\NetHTTP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\imwrap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

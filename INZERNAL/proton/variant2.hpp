@@ -295,7 +295,10 @@ inline variant_t operator-(variant_t lhs, const variant_t& rhs) {
     lhs -= rhs;
     return lhs;
 }
+#ifndef C_MAX_VARIANT_LIST_PARMS
 #define C_MAX_VARIANT_LIST_PARMS 7
+#endif
+
 class variantlist_t {
     int size_of_variant(variant_t::vartype_t type) const {
         switch (type) {

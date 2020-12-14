@@ -2615,7 +2615,7 @@ void ImGui::RenderTextClippedEx(ImDrawList* draw_list, const ImVec2& pos_min, co
     }
 }
 
-void ImGui::RenderTextClipped(const ImVec2& pos_min, const ImVec2& pos_max, const char* text, const char* text_end, const ImVec2* text_size_if_known, const ImVec2& align, const ImRect* clip_rect)
+void ImGui::RenderTextClipped(const ImVec2& pos_min, const ImVec2& pos_max, const char* text, const char* text_end, const ImVec2* text_size_if_known, const ImVec2& align, const ImRect* clip_rect, bool color)
 {
     // Hide anything after a '##' string
     const char* text_display_end = FindRenderedTextEnd(text, text_end);
@@ -2710,7 +2710,26 @@ void ImGui::RenderTextEllipsis(ImDrawList* draw_list, const ImVec2& pos_min, con
     if (g.LogEnabled)
         LogRenderedText(&pos_min, text, text_end_full);
 }
-
+void ImGui::RenderFrame_Multi(ImVec2 p_min, ImVec2 p_max, ImU32 fill_col, ImU32 fill_col_2, bool border, float rounding) {
+    ImGuiContext& g = *GImGui;
+    ImGuiWindow* window = g.CurrentWindow;
+    window->DrawList->AddRectFilledMultiColor(p_min, p_max, fill_col, fill_col, fill_col_2, fill_col_2);
+    const float border_size = g.Style.FrameBorderSize;
+    if (border && border_size > 0.0f) {
+        window->DrawList->AddRect(p_min + ImVec2(1, 1), p_max + ImVec2(1, 1), GetColorU32(ImGuiCol_BorderShadow), rounding, ImDrawCornerFlags_All, border_size);
+        window->DrawList->AddRect(p_min, p_max, GetColorU32(ImGuiCol_Border), rounding, ImDrawCornerFlags_All, border_size);
+    }
+}
+void ImGui::RenderFrame_Multi2(ImVec2 p_min, ImVec2 p_max, ImU32 fill_col, ImU32 fill_col_2, bool border, float rounding) {
+    ImGuiContext& g = *GImGui;
+    ImGuiWindow* window = g.CurrentWindow;
+    window->DrawList->AddRectFilledMultiColor(p_min, p_max, fill_col_2, fill_col, fill_col, fill_col_2);
+    const float border_size = g.Style.FrameBorderSize;
+    if (border && border_size > 0.0f) {
+        window->DrawList->AddRect(p_min + ImVec2(1, 1), p_max + ImVec2(1, 1), GetColorU32(ImGuiCol_BorderShadow), rounding, ImDrawCornerFlags_All, border_size);
+        window->DrawList->AddRect(p_min, p_max, GetColorU32(ImGuiCol_Border), rounding, ImDrawCornerFlags_All, border_size);
+    }
+}
 // Render a rectangle shaped with optional rounding and borders
 void ImGui::RenderFrame(ImVec2 p_min, ImVec2 p_max, ImU32 fill_col, bool border, float rounding)
 {
@@ -4536,6 +4555,85 @@ bool ImGui::IsMouseDragPastThreshold(ImGuiMouseButton button, float lock_thresho
     return g.IO.MouseDragMaxDistanceSqr[button] >= lock_threshold * lock_threshold;
 }
 
+bool ImGui::ToggleButton(const char* label, bool* v, const ImVec2& size_arg, int type) {
+    ImGuiWindow* window = GetCurrentWindow();
+    if (window->SkipItems)
+        return false;
+
+    int flags = 0;
+    ImGuiContext& g = *GImGui;
+    const ImGuiStyle& style = g.Style;
+    const ImGuiID id = window->GetID(label);
+    const ImVec2 label_size = CalcTextSize(label, NULL, true);
+
+    ImVec2 pos = window->DC.CursorPos;
+    ImVec2 size = CalcItemSize(size_arg, label_size.x + style.FramePadding.x * 2.0f, label_size.y + style.FramePadding.y * 2.0f);
+
+    const ImRect bb(pos, pos + size);
+    ItemSize(bb, style.FramePadding.y);
+    if (!ItemAdd(bb, id))
+        return false;
+
+    bool hovered, held;
+    bool pressed = ButtonBehavior(bb, id, &hovered, &held, flags);
+
+    const ImU32 col = GetColorU32(((held && hovered) || *v) ? ImGuiCol_ButtonActive : (hovered ? ImGuiCol_ButtonHovered : ImGuiCol_Button));
+
+    if (hovered) {
+        static float alp = 0.0f;
+        static bool dir = false;
+        alp += dir ? -0.004f : 0.004f;
+
+        if (alp <= 0.0f) {
+            dir = !dir;
+            alp = 0.0f;
+        }
+        else if (alp >= 0.2f) {
+            dir = !dir;
+            alp = 0.2f;
+        }
+        const ImU32 color1 = col - GetColorU32(ImVec4(0.f, 0.f, 0.f, alp));
+        const ImU32 color2 = color1 - GetColorU32(ImVec4(0.05f, 0.05f, 0.05f, 0.1f));
+
+        if (type == 1)
+            RenderFrame_Multi(bb.Min, bb.Max, color1, color2, true, style.FrameRounding);
+        else if (type == 2)
+            RenderFrame_Multi2(bb.Min, bb.Max, color1, color2, true, style.FrameRounding);
+        else
+            RenderFrame(bb.Min, bb.Max, color1, true, style.FrameRounding);
+    }
+    else {
+        const ImU32 color2 = col - GetColorU32(ImVec4(0.05f, 0.05f, 0.05f, 0.1f));
+        if (type == 1)
+            RenderFrame_Multi(bb.Min, bb.Max, col, color2, true, style.FrameRounding);
+        else if (type == 2)
+
+            RenderFrame_Multi2(bb.Min, bb.Max, col, color2, true, style.FrameRounding);
+        else
+            RenderFrame(bb.Min, bb.Max, col, true, style.FrameRounding);
+    }
+
+    if (type != 0) {
+        const auto color_2 = GetColorU32(ImVec4(1.f, 1.f, 1.f, 1.f));
+        if (type == 1) {
+            if (*v)
+                RenderFrame(ImVec2(bb.Min.x, bb.Max.y - 3.f), bb.Max, color_2, true, style.FrameRounding);
+            else
+                RenderFrame(ImVec2(bb.Min.x, bb.Max.y - 3.f), bb.Max, col, true, style.FrameRounding);
+        }
+        else if (type == 2) {
+            if (*v)
+                RenderFrame(bb.Min, ImVec2(bb.Min.x + 3.f, bb.Max.y), color_2, true, style.FrameRounding);
+            else
+                RenderFrame(bb.Min, ImVec2(bb.Min.x + 3.f, bb.Max.y), col, true, style.FrameRounding);
+        }
+    }
+    RenderTextClipped(bb.Min + style.FramePadding, bb.Max - style.FramePadding, label, NULL, &label_size, style.ButtonTextAlign, &bb, (*v));
+    if (pressed)
+        *v = !*v;
+
+    return pressed;
+}
 bool ImGui::IsMouseDragging(ImGuiMouseButton button, float lock_threshold)
 {
     ImGuiContext& g = *GImGui;
