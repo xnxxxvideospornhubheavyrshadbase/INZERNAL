@@ -388,7 +388,7 @@ inline Variant operator-(Variant lhs, const Variant& rhs);
 
 //a VariantList holds a group of variants, we pass these when we don't know in advance how many variants we want to use
 
-#define C_MAX_VARIANT_LIST_PARMS 7
+#define C_MAX_VARIANT_LIST_PARMS 9
 
 /*
 //example of memory serialization of a VariantList
@@ -433,8 +433,6 @@ class VariantList
 			}
 		}
 
-		uint8_t * SerializeToMem(uint32_t *pSizeOut, uint8_t *pDest); //pass in NULL for dest and it will new[] the memory itself
-		bool SerializeFromMem(uint8_t *pSrc, int length, int *pBytesReadOut = NULL); //length seems to be unused..
 		Variant m_variant[C_MAX_VARIANT_LIST_PARMS]; //non-dynamic for speed
 		void GetVariantListStartingAt(VariantList *pOut, int startIndex); //shift variables over to the right, deleting some.  0 based index
 		std::string GetContentsAsDebugString();

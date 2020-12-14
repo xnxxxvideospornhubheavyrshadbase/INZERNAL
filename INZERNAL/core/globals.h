@@ -1,5 +1,17 @@
 #pragma once
-#include <Windows.h>
+#define WIN32_LEAN_AND_MEAN
+
+#include <stdio.h>
+#include <windows.h>
+#include <winsock2.h>
+#include <ws2tcpip.h>
+
+// Need to link with Ws2_32.lib
+#pragma comment(lib, "ws2_32.lib")
+#pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "shlwapi.lib")
+#include <enet/include/enet.h>
+
 #include <d3d9.h>
 #include <proton/Variant.h>
 #include <proton/clanlib/vec2.h>
@@ -29,7 +41,6 @@ class WorldObjectMap;
 class NetAvatar;
 class LevelTouchComponent;
 class WorldCamera;
-class EnetPeer;
 class variantlist_t;
 class GameLogic;
 
@@ -41,8 +52,8 @@ namespace types {
 	using	NetAvatar_CanMessageT4		= bool(__cdecl*)(NetAvatar*);
 	using	CanPunchOrBuildNow			= bool(__cdecl*)(AvatarRenderData*);
 	using	ObjectMap_HandlePacket		= bool(__cdecl*)(WorldObjectMap*, GameUpdatePacket*);
-	using	SendPacketRaw				= void(__cdecl*)(int, GameUpdatePacket*, int, void*, EnetPeer*, int);
-	using	SendPacket					= void(__cdecl*)(int, const std::string&, EnetPeer*);
+	using	SendPacketRaw				= void(__cdecl*)(int, GameUpdatePacket*, int, void*, ENetPeer*, int);
+	using	SendPacket					= void(__cdecl*)(int, const std::string&, ENetPeer*);
 	using	HandleTouch					= void(__cdecl*)(LevelTouchComponent*, CL_Vec2f, bool);
 	using	WorldCamera_OnUpdate		= void(__cdecl*)(WorldCamera*, CL_Vec2f, CL_Vec2f);
 	using	UpdateFromNetAvatar			= void(__cdecl*)(AvatarRenderData*, NetAvatar*);

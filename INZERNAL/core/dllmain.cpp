@@ -1,5 +1,4 @@
 #pragma once
-#include <Windows.h>
 #include <core/globals.h>
 #include <core/gt.h>
 #include <core/minhook/hook.h>
@@ -7,6 +6,8 @@
 #include <hooks\hooks.h>
 #include <process.h>
 #include <core/sigs.hpp>
+#include <proton\MiscUtils.h>
+
 
 bool unload_done = false;
 void on_exit() {

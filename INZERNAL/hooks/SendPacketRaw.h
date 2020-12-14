@@ -5,14 +5,17 @@
 
 class SendPacketRawHook {
    public:
-    static void Execute(types::SendPacketRaw orig, int type, GameUpdatePacket* packet, int size, void* packetsender, EnetPeer* peer, int flag) {
+    static void Execute(types::SendPacketRaw orig, int type, GameUpdatePacket* packet, int size, void* packetsender, ENetPeer* peer, int flag) {
         if (opt::cheat::block_sendpacketraw)
             return;
 
-        printf("sending raw packet with type %d\n", packet->type);
-
-        if (packet->type == PACKET_APP_INTEGRITY_FAIL)
+        if (packet->type == PACKET_APP_INTEGRITY_FAIL) {
+            utils::printc("95", "Was going to send a packet about app integrity failure, but we blocked it.");
             return;
+        }
+           
+
+        printf("sending raw packet with type: %d [%s]\n", packet->type, gt::get_type_string(packet->type).c_str());
 
         if (packet->type == 0 && packet->flags & 4) {
             auto player = sdk::GetGameLogic()->GetLocalPlayer();
@@ -20,7 +23,7 @@ class SendPacketRawHook {
                 player->SetModStatus(opt::mod_zoom, opt::cheat::dev_zoom);
         }
 
-        if (packet->velocity_x == 1000.f || packet->type == PACKET_PING_REPLY || packet->type == PACKET_PING_REQUEST) {
+        if (packet->velocity_x == 1000.f || packet->type == PACKET_PING_REPLY) {
             utils::printc("95", "[ping check] sending emulated response so we dont get dc or ban");
             GameUpdatePacket pk{ 0 };
             pk.type = PACKET_PING_REPLY;
@@ -31,7 +34,7 @@ class SendPacketRawHook {
             pk.velocity_y = 250.f;  // movement speed
 
             void* PacketSender = nullptr;
-            orig(NET_MESSAGE_GAME_PACKET, &pk, 56, PacketSender, sdk::GetPeer(), flag);
+            orig(NET_MESSAGE_GAME_PACKET, &pk, 56, PacketSender, peer, flag);
             return;
         }
 

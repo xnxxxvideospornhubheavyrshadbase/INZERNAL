@@ -1,4 +1,5 @@
 #pragma once
+#include <core/globals.h>
 #include <aclapi.h>
 #include <core/gt.h>
 #include <core/utils.h>
@@ -17,6 +18,8 @@ int _out_h = 0;
 
 typedef std::mt19937 rng_type;
 rng_type rng;
+
+
 
 void utils::attach_console() {
     //set up utils::print to work using WriteConsoleA

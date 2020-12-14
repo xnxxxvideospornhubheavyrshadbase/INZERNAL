@@ -1,7 +1,7 @@
 #pragma once
+#include <math.h>
 #include <stdint.h>
 #include <stdio.h>
-#include <math.h>
 #pragma pack(push, 1)
 struct GameUpdatePacket {
     uint8_t type{}; //0
@@ -168,7 +168,7 @@ enum {
     PACKET_APP_INTEGRITY_FAIL,
     PACKET_DISCONNECT,
     PACKET_BATTLE_JOIN,
-    PACKET_BATTLE_EVEN,
+    PACKET_BATTLE_EVENT,
     PACKET_USE_DOOR,
     PACKET_SEND_PARENTAL,
     PACKET_GONE_FISHIN,
@@ -179,7 +179,10 @@ enum {
     PACKET_SEND_PARTICLE_EFFECT_V2,
     PACKET_ACTIVE_ARROW_TO_ITEM,
     PACKET_SELECT_TILE_INDEX,
-    PACKET_SEND_PLAYER_TRIBUTE_DATA
+    PACKET_SEND_PLAYER_TRIBUTE_DATA,
+    PACKET_SET_EXTRA_MODS,
+    PACKET_ON_STEP_ON_TILE_MOD,
+    PACKET_MAXVAL //not real, just for string overflow
 };
 enum {
     NET_MESSAGE_UNKNOWN = 0,

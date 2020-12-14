@@ -30,6 +30,15 @@
     <ClCompile Include="core\miniz\miniz.c" />
     <ClCompile Include="core\sigs.cpp" />
     <ClCompile Include="core\utils.cpp" />
+    <ClCompile Include="enet\callbacks.c" />
+    <ClCompile Include="enet\compress.c" />
+    <ClCompile Include="enet\host.c" />
+    <ClCompile Include="enet\list.c" />
+    <ClCompile Include="enet\packet.c" />
+    <ClCompile Include="enet\peer.c" />
+    <ClCompile Include="enet\protocol.c" />
+    <ClCompile Include="enet\unix.c" />
+    <ClCompile Include="enet\win32.c" />
     <ClCompile Include="hooks\hooks.cpp" />
     <ClCompile Include="menu\imgui\imgui.cpp" />
     <ClCompile Include="menu\imgui\imgui_draw.cpp" />
@@ -74,6 +83,15 @@
     <ClInclude Include="core\nlhomann\json.hpp" />
     <ClInclude Include="core\sigs.hpp" />
     <ClInclude Include="core\utils.h" />
+    <ClInclude Include="enet\include\callbacks.h" />
+    <ClInclude Include="enet\include\enet.h" />
+    <ClInclude Include="enet\include\list.h" />
+    <ClInclude Include="enet\include\protocol.h" />
+    <ClInclude Include="enet\include\time.h" />
+    <ClInclude Include="enet\include\types.h" />
+    <ClInclude Include="enet\include\unix.h" />
+    <ClInclude Include="enet\include\utility.h" />
+    <ClInclude Include="enet\include\win32.h" />
     <ClInclude Include="hooks\hooks.h" />
     <ClInclude Include="hooks\ProcessTankUpdatePacket.h" />
     <ClInclude Include="hooks\SendPacket.h" />
@@ -117,6 +135,7 @@
     <ClInclude Include="proton\VariantDB.h" />
     <ClInclude Include="proton\vector2.hpp" />
     <ClInclude Include="sdk\AvatarRenderData.h" />
+    <ClInclude Include="sdk\ENetClient.hpp" />
     <ClInclude Include="sdk\EntityComponent.h" />
     <ClInclude Include="sdk\GameLogic.h" />
     <ClInclude Include="sdk\GameUpdatePacket.h" />
@@ -254,7 +273,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_WINDOWS;_USRDLL;WINDOWS_IGNORE_PACKING_MISMATCH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_WINDOWS;_USRDLL;WINDOWS_IGNORE_PACKING_MISMATCH;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -266,7 +285,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
-      <AdditionalDependencies>d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>inzernal.def</ModuleDefinitionFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>false</DataExecutionPrevention>

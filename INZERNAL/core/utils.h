@@ -3,14 +3,16 @@
 #include <core/miniz/miniz.h>
 #include <proton/RTFileFormat.h>
 #include <stdio.h>
-#include <windows.h>
 #include <random>
 #include <sstream>
 #include <string>
 #include <core/sigs.hpp>
+#include <sdk/GameUpdatePacket.h>
 
 //for our dear memory manipulation
 #define GTClass struct __declspec(align(1)) alignas(1) 
+
+
 
 namespace utils {
     void attach_console();
@@ -19,6 +21,10 @@ namespace utils {
     char read_key();
     uint8_t* read_file(const std::string& file, uint32_t& size);
 
+    __forceinline uint8_t* get_extended(GameUpdatePacket* packet) {
+        return reinterpret_cast<uint8_t*>(&packet->data);
+
+    }
     template <typename t>
     bool patch_ptr(uintptr_t addr, t data) {
         void* address = reinterpret_cast<void*>(addr);
@@ -107,7 +113,6 @@ namespace utils {
     uintptr_t find_func_has(std::vector<const char*> to_be_found, uint32_t max_length = 0);
     bool is_number(const std::string& s);
 
-    bool dir_exists(LPCSTR name);
     std::string format(const char* msg, ...);
     void unprotect_process();
 } // namespace utils

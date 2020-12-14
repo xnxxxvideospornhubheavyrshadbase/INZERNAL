@@ -1,4 +1,6 @@
 #pragma once
+#include <core/globals.h>
+
 //include everything here so no need to include them individually in other files
 #include <sdk/AvatarRenderData.h>
 #include <sdk/GameLogic.h>
@@ -6,12 +8,12 @@
 #include <sdk/NetAvatar.h>
 #include <sdk/world/WorldRenderer.h>
 #include <sdk/world/WorldTileMap.h>
+#include <sdk/ENetClient.hpp>
 #include <core/sigs.hpp>
 
-class EnetPeer;
 namespace sdk {
     GameLogic* GetGameLogic();
-    uintptr_t* GetClient(); //TODO: class for enetclient
-    EnetPeer* GetPeer();
+    ENetClient* GetClient();
+    ENetPeer* GetPeer();
 
 } // namespace sdk

@@ -9,9 +9,10 @@
 #include <menu\menu.h>
 #include <sdk/sdk.h>
 #include <stdio.h>
-#include <windows.h>
 #include <iomanip>
 #include <thread>
+
+
 
 #define ORIGINAL(x) types::x hooks::orig::##x{};
 #define MAKEHOOK(x) MH_CreateHook(LPVOID(##x), hooks::##x, (void**)(&orig::##x));
@@ -223,7 +224,7 @@ bool __cdecl hooks::ObjectMap_HandlePacket(WorldObjectMap* map, GameUpdatePacket
     return orig::ObjectMap_HandlePacket(map, packet);
 }
 
-void __cdecl hooks::SendPacketRaw(int type, GameUpdatePacket* packet, int size, void* packetsender, EnetPeer* peer, int flag) {
+void __cdecl hooks::SendPacketRaw(int type, GameUpdatePacket* packet, int size, void* packetsender, ENetPeer* peer, int flag) {
     SendPacketRawHook::Execute(orig::SendPacketRaw, type, packet, size, packetsender, peer, flag);
 }
 
@@ -251,7 +252,7 @@ void __cdecl hooks::UpdateFromNetAvatar(AvatarRenderData* render_data, NetAvatar
     orig::UpdateFromNetAvatar(render_data, player);
 }
 
-void __cdecl hooks::SendPacket(int type, const std::string& packet, EnetPeer* peer) {
+void __cdecl hooks::SendPacket(int type, const std::string& packet, ENetPeer* peer) {
     SendPacketHook::Execute(orig::SendPacket, type, packet, peer);
 }
 

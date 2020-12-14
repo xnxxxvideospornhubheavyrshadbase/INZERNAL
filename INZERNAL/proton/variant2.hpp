@@ -495,7 +495,7 @@ class variantlist_t {
         for (int i = 0; i < C_MAX_VARIANT_LIST_PARMS; i++) {
             if (m_variant[i].get_type() == variant_t::vartype_t::TYPE_UNUSED)
                 continue;
-            ss << "param " << std::to_string(i) << ": " << m_variant[i].print() + "\n";
+            ss << "p " << std::to_string(i) << ": " << m_variant[i].print() + "\n";
         }
         if (ss.str().empty())
             ss.str("(none)");

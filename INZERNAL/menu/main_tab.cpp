@@ -13,10 +13,10 @@ void menu::main_tab() {
         }
     }
     if (ImGui::CollapsingHeader("Gravity changer")) {
-        if (ImGui::BeginChild("###cooldownchanger", ImVec2(ImGui::GetWindowWidth() * 0.93f, 60.f), true)) {
+        if (ImGui::BeginChild("###gravitychanger", ImVec2(ImGui::GetWindowWidth() * 0.93f, 60.f), true)) {
             ImGui::Checkbox("Enable", &opt::cheat::gravity_on);
             ImGui::SameLine();
-            ImGui::SliderFloat("###grav", &opt::cheat::gravity_val, -1000.0f, 3000.f, "%0.0f");
+            ImGui::SliderFloat("###grav", &opt::cheat::gravity_val, -500.0f, 2000.f, "%0.0f");
             ImGui::EndChild();
         }
     }
@@ -26,7 +26,17 @@ void menu::main_tab() {
     ImGui::Text("tilemap: %llx", sdk::GetGameLogic()->GetTileMap());
     ImGui::Text("world: %llx", sdk::GetGameLogic()->GetWorld());
     ImGui::Text("renderer: %llx", sdk::GetGameLogic()->GetWorldRenderer());
-    ImGui::Text("enetclient: %llx", sdk::GetClient());
+    auto client = sdk::GetClient();
+    if (client) {
+        ImGui::Text("enetclient: %llx", client);
+        ImGui::Text("peer: %llx, host %llx", client->peer, client->host);
+        ImGui::InputInt("tracking_tick", &client->tracking_tick);
+        ImGui::InputInt("conn_status", &client->conn_status);
+        ImGui::InputInt("another_timer", &client->another_timer);
+
+     /*   if (client->connection_timer < 1)
+            client->connection_timer = 1;*/
+    }
 
     if (ImGui::Button("SDK test")) {
         auto tilemap = sdk::GetGameLogic()->GetTileMap();

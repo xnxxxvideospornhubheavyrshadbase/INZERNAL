@@ -9,6 +9,7 @@ namespace gt {
     std::string generate_rid();
     std::string generate_meta();
     std::string get_random_flag();
+    std::string get_type_string(uint8_t type);
     void sendpacket(int type, std::string message);
     void ghetto_fix();
     bool patch_banbypass();
