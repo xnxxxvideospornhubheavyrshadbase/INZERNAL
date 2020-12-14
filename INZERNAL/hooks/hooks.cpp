@@ -32,6 +32,7 @@ ORIGINAL(CanSeeGhosts);
 ORIGINAL(NetAvatar_Gravity);
 ORIGINAL(NetHTTP_Update);
 ORIGINAL(EndScene);
+ORIGINAL(ProcessAcceleration);
 
 WNDPROC hooks::orig::wndproc; //wndproc is special case
 
@@ -79,7 +80,8 @@ void hooks::init() {
         ProcessTankUpdatePacket         = sigs::get(sig::processtankupdatepacket),
         CanSeeGhosts                    = sigs::get(sig::canseeghosts),
         NetAvatar_Gravity               = sigs::get(sig::gravity),
-        NetHTTP_Update                  = sigs::get(sig::nethttp_update);
+        NetHTTP_Update                  = sigs::get(sig::nethttp_update),
+        ProcessAcceleration             = sigs::get(sig::processacceleration);
 
     MH_CreateHook(LPVOID(vtable[42]), EndScene, (void**)(&orig::EndScene));
 	MAKEHOOK(App_GetVersion);
@@ -97,6 +99,7 @@ void hooks::init() {
     MAKEHOOK(CanSeeGhosts);
     MAKEHOOK(NetAvatar_Gravity);
     MAKEHOOK(NetHTTP_Update);
+    MAKEHOOK(ProcessAcceleration);
 
 	orig::wndproc = WNDPROC(SetWindowLongPtrW(global::hwnd, -4, LONG_PTR(WndProc)));
 
@@ -284,6 +287,20 @@ void __cdecl hooks::NetAvatar_Gravity(NetAvatar* player) {
     }
     else
         orig::NetAvatar_Gravity(player);
+}
+
+void __cdecl hooks::ProcessAcceleration(NetAvatar* player, float speed) {
+    orig::ProcessAcceleration(player, speed);
+    if (opt::cheat::movespeed_on) {
+        if (speed != 0.f) {
+            if ((opt::cheat::movespeed_start || (!opt::cheat::movespeed_start && fabsf(player->velocity_x - player->impulse_x * 0.5f) >= 250.f))) {
+                player->velocity_x -= (player->velocity_x - player->impulse_x * 0.5f);
+                player->velocity_x += speed > 0.f ? opt::cheat::movespeed_val : -opt::cheat::movespeed_val;
+            }
+        }
+        else if (opt::cheat::movespeed_stop)
+            player->velocity_x -= (player->velocity_x - player->impulse_x * 0.5f);
+    }
 }
 
 void __cdecl hooks::NetHTTP_Update(NetHTTP* http) {

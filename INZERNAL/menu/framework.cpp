@@ -17,7 +17,6 @@ void menu::framework_tab() {
     auto local = logic->GetLocalPlayer();
     auto world = logic->GetWorld();
     auto tilemap = logic->GetTileMap();
-    // ImGui::Text("GameLogic: %llx", logic);
     bool local_div = ImGui::BeginChild("Player", ImVec2(ImGui::GetWindowWidth() / 3.1f, 250.f), true, ImGuiWindowFlags_MenuBar);
     if (local_div && local) {
         ImGui::BeginMenuBar();
@@ -195,4 +194,6 @@ void menu::framework_tab() {
             free(file);
         }
     }
+    ImGui::SameLine();
+    ImGui::Text("GameLogic: %llx", logic);
 }

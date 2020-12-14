@@ -44,6 +44,10 @@ namespace opt {
 		float	gravity_val			=	1000.0f;	//the gravity, 1000 is normal
 		bool	block_sendpacketraw	=	false;		//blocks any and all sendpacketraw requests. Acts as full ghost. You can safely explore worlds with this on.
 		bool	antighost			=	true;		//ignores ghost effects. doesnt ban, but people can see that you are not affected from ur speed.
+		bool	movespeed_on		=	false;		//movement speedhack. shouldnt ban.
+		bool	movespeed_start		=	true;		//instant acceleration/start of movement
+		bool	movespeed_stop		=	true;		//instant deceleration/stop of movement
+		float	movespeed_val		=	250.f;		//actual speed that you will have
 	}
 	
 }

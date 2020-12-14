@@ -48,7 +48,8 @@ void sigs::init() {
     add_pattern("hooks.cpp/ProcessTankUpdatePacket", "83 78 04 71 75 ? 49", sig::type::fstart);
     add_pattern("hooks.cpp/CanSeeGhosts", "04 00 00 00 e8 ? ? ? ? 8b c8 e8", sig::type::call, 11);
     add_pattern("hooks.cpp/NetAvatar::Gravity", "B9 CA 27 00 00", sig::type::fstart);
-    add_pattern("hooks.cpp/NetHTTP:Update", "05 4D 01 00 00 89 ?? ?? 00", sig::type::fstart);
+    add_pattern("hooks.cpp/NetHTTP::Update", "05 4D 01 00 00 89 ?? ?? 00", sig::type::fstart);
+    add_pattern("hooks.cpp/NetAvatar::ProcessAcceleration", "83 78 04 3c", sig::type::fstart);
 
     size_t invalid = 0;
     for (auto sig : database) {

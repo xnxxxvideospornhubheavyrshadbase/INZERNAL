@@ -23,7 +23,8 @@ namespace sig {
         processtankupdatepacket,
         canseeghosts,
         gravity,
-        nethttp_update
+        nethttp_update,
+        processacceleration
     };
 
     namespace type {

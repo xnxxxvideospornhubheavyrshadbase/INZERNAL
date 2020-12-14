@@ -39,6 +39,7 @@ namespace hooks {
         TYPE(CanSeeGhosts);
         TYPE(NetAvatar_Gravity);
         TYPE(NetHTTP_Update);
+        TYPE(ProcessAcceleration);
 
         extern WNDPROC wndproc;
     } // namespace orig
@@ -62,6 +63,7 @@ namespace hooks {
     void    __cdecl     ProcessTankUpdatePacket(GameLogic* logic, GameUpdatePacket* packet);
     bool    __cdecl     CanSeeGhosts(int id);
     void    __cdecl     NetAvatar_Gravity(NetAvatar* player);
+    void    __cdecl     ProcessAcceleration(NetAvatar* player, float speed);
     void    __cdecl     NetHTTP_Update(NetHTTP* http);
     long    __stdcall   EndScene(IDirect3DDevice9* device);
 

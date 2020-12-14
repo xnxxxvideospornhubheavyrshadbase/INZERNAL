@@ -24,10 +24,14 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
     float unk3;
     uint32_t unk4;
     bool unk5;
-    char unk6[55];
+    char unk02[15];
+    float velocity_x;
+    char unk03[8];
+    float impulse_x;
+    char unk6[24];
     int emotion;
     char unk7[8];
-    void* NetControllerLocal;
+    void* NetControllerLocal; //280
     void* AvatarPacketReceiver;
     void* AvatarPacketSender;
     char unk8[148];
@@ -89,5 +93,5 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
 #pragma pack(pop)
 
 //for debugging purposes, feel free to use offsetof to match in CE or IDA
-constexpr auto offset = offsetof(NetAvatar, gravity);
+constexpr auto offset = offsetof(NetAvatar, NetControllerLocal);
 

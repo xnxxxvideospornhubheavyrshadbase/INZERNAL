@@ -63,6 +63,7 @@ namespace types {
 	using	CanSeeGhosts				= bool(__cdecl*)(int);
 	using	NetAvatar_Gravity			= void(__cdecl*)(NetAvatar*);
 	using	NetHTTP_Update				= void(__cdecl*)(NetHTTP*);
+	using	ProcessAcceleration			= void(__cdecl*)(NetAvatar*, float);
 
 	//other functions, not hooked
 	using	WorldToScreen				= void(__cdecl*)(WorldCamera*, CL_Vec2f&, CL_Vec2f&);
@@ -136,6 +137,10 @@ namespace opt {
 		extern float	gravity_val;
 		extern bool		block_sendpacketraw;
 		extern bool		antighost;
+		extern bool		movespeed_on;
+		extern bool		movespeed_start;
+		extern bool		movespeed_stop;
+		extern float	movespeed_val;
 	}
 	
 }

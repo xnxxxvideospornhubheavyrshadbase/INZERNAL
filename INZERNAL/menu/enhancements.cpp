@@ -3,25 +3,7 @@
 #include <sdk/sdk.h>
 
 void menu::enhancements_tab() {
-    if (ImGui::CollapsingHeader("Punch/build cooldown changer")) {
-        if (ImGui::BeginChild("###cooldownchanger", ImVec2(ImGui::GetWindowWidth() * 0.93f, 60.f), true)) {
-            ImGui::Checkbox("Enable###punch", &opt::cheat::punch_cooldown_on);
-            ImGui::SameLine();
-            ImGui::SliderFloat("####pcoold", &opt::cheat::punch_cooldown_val, 0.05f, 0.4f, "%0.2f");
-            ImGui::Text("Shouldn't ban but low values will disconnect.");
-            ImGui::EndChild();
-        }
-    }
-    if (ImGui::CollapsingHeader("Gravity changer")) {
-        if (ImGui::BeginChild("###gravitychanger", AUTOSIZE(2), true)) {
-            ImGui::Checkbox("Enable###grav", &opt::cheat::gravity_on);
-            ImGui::SameLine();
-            ImGui::SliderFloat("###grav", &opt::cheat::gravity_val, -500.0f, 2000.f, "%0.0f");
-            ImGui::Text("Shouldn't ban except negative/zero gravity when in air for too long.");
-            ImGui::EndChild();
-        }
-    }
-
+    
     if (ImGui::CollapsingHeader("Custom Server")) {
         if (ImGui::BeginChild("###customserver", AUTOSIZE(2.f), true)) {
             imwrap::checkbox("Enable###custom", opt::custom_server_on, "You can use this to connect to private servers too");
