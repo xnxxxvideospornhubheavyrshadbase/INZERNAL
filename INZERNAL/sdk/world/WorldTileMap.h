@@ -1,6 +1,5 @@
 #pragma once
 #include <core/utils.h>
-#include <sdk/NetAvatar.h>
 #include <sdk/world/Tile.h>
 
 class World;
@@ -31,4 +30,11 @@ GTClass WorldTileMap {
 
 #pragma pack(pop)
 
-constexpr auto testoffset = offsetof(WorldTileMap, pad0);
+//OFFSET test = WorldTileMap::pad0
+//auto a = OFFSET(WorldTileMap, pad0);
+//
+//auto a = offsetof(WorldTileMap, pad0);
+//
+//constexpr decltype(&WorldTileMap::pad0) test = offsetof(decltype(WorldTileMap), pad0);
+//
+//constexpr auto testoffset = offsetof(WorldTileMap, pad0);

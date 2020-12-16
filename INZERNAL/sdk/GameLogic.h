@@ -1,10 +1,12 @@
 #pragma once
 #include <core/utils.h>
-#include <sdk/NetAvatar.h>
 #include <sdk/world/World.h>
+#include <core/sigs.hpp>
+#include <core/globals.h>
 
 class WorldRenderer;
 class WorldTileMap;
+class NetAvatar;
 
 #pragma pack(push, 1)
 GTClass GameLogic {

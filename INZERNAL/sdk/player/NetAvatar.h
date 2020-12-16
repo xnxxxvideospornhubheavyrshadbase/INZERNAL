@@ -36,8 +36,23 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
     void* AvatarPacketSender;
     char unk8[148];
     float gravity;
-    char unk9[8];
+    float gravity_unused;
+    char unk9[4];
     float gravity_verify;
+    float accel;
+    void test() {
+        constexpr auto offset = offsetof(NetAvatar, accel_unused);
+        
+    }
+    float accel_unused;
+    float accel_second;
+    float accel_verify;
+    float speed;
+    float speed_unused;
+    float speed_second;
+    float speed_verify;
+    char unk10[140];
+    int client_hack_type;   //ban report type for SendMessageT4
 
     //TODO: somehow differentiate between local and others so you can use SetPos, GetPos for other players too
     //(since they dont use encrypted coords too)
@@ -93,5 +108,5 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
 #pragma pack(pop)
 
 //for debugging purposes, feel free to use offsetof to match in CE or IDA
-constexpr auto offset = offsetof(NetAvatar, NetControllerLocal);
+constexpr auto offset = offsetof(NetAvatar, client_hack_type);
 

@@ -1,3 +1,4 @@
+#pragma once
 #include <sdk/sdk.h>
 
 GameLogic* sdk::GetGameLogic() {

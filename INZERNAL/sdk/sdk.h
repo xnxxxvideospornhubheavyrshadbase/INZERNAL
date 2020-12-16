@@ -2,10 +2,10 @@
 #include <core/globals.h>
 
 //include everything here so no need to include them individually in other files
-#include <sdk/AvatarRenderData.h>
+#include <sdk/player/AvatarRenderData.h>
 #include <sdk/GameLogic.h>
 #include <sdk/GameUpdatePacket.h>
-#include <sdk/NetAvatar.h>
+#include <sdk/player/NetAvatar.h>
 #include <sdk/world/WorldRenderer.h>
 #include <sdk/world/WorldTileMap.h>
 #include <sdk/ENetClient.hpp>

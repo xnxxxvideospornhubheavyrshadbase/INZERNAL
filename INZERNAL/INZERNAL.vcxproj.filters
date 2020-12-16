@@ -299,13 +299,7 @@
     <ClInclude Include="sdk\GameLogic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdk\NetAvatar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="hooks\SendPacketRaw.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sdk\AvatarRenderData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="proton\variant2.hpp">
@@ -411,6 +405,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="menu\imwrap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\player\AvatarRenderData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\player\NetAvatar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -139,12 +139,12 @@
     <ClInclude Include="proton\variant2.hpp" />
     <ClInclude Include="proton\VariantDB.h" />
     <ClInclude Include="proton\vector2.hpp" />
-    <ClInclude Include="sdk\AvatarRenderData.h" />
+    <ClInclude Include="sdk\player\AvatarRenderData.h" />
     <ClInclude Include="sdk\ENetClient.hpp" />
     <ClInclude Include="sdk\EntityComponent.h" />
     <ClInclude Include="sdk\GameLogic.h" />
     <ClInclude Include="sdk\GameUpdatePacket.h" />
-    <ClInclude Include="sdk\NetAvatar.h" />
+    <ClInclude Include="sdk\player\NetAvatar.h" />
     <ClInclude Include="sdk\sdk.h" />
     <ClInclude Include="sdk\world\Tile.h" />
     <ClInclude Include="sdk\world\World.h" />
