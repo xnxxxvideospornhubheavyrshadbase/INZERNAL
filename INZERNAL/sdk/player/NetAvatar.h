@@ -40,10 +40,6 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
     char unk9[4];
     float gravity_verify;
     float accel;
-    void test() {
-        constexpr auto offset = offsetof(NetAvatar, accel_unused);
-        
-    }
     float accel_unused;
     float accel_second;
     float accel_verify;
@@ -106,7 +102,4 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
     }
 };
 #pragma pack(pop)
-
-//for debugging purposes, feel free to use offsetof to match in CE or IDA
-constexpr auto offset = offsetof(NetAvatar, client_hack_type);
 

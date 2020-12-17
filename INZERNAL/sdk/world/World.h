@@ -18,5 +18,3 @@ GTClass World { //TODO: literally load offline worlds with World::LoadFromMem, w
     //world object map
 };
 #pragma pack(pop)
-
-constexpr auto objmap = offsetof(World, worldobjectmap);

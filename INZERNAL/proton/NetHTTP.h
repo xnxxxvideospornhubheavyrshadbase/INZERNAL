@@ -60,5 +60,3 @@ class NetHTTP {
     std::string m_fileName;
     std::string m_contentType;
 };
-
-constexpr auto offset_http = offsetof(NetHTTP, m_postData);

@@ -29,12 +29,3 @@ GTClass WorldTileMap {
 };
 
 #pragma pack(pop)
-
-//OFFSET test = WorldTileMap::pad0
-//auto a = OFFSET(WorldTileMap, pad0);
-//
-//auto a = offsetof(WorldTileMap, pad0);
-//
-//constexpr decltype(&WorldTileMap::pad0) test = offsetof(decltype(WorldTileMap), pad0);
-//
-//constexpr auto testoffset = offsetof(WorldTileMap, pad0);

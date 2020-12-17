@@ -47,5 +47,3 @@ GTClass GameLogic {
 };
 
 #pragma pack(pop)
-
-constexpr auto offset2 = offsetof(GameLogic, renderer);
