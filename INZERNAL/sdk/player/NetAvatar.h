@@ -6,6 +6,43 @@
 #include <sdk/EntityComponent.h>
 
 #pragma pack(push, 1)
+GTClass EncryptedFloat {
+   private:
+    float enc_first;
+    int unused; //this is never used in any single place
+    float enc_second;
+    float weight;
+
+   public:
+
+    //basically gt sets weight to random float between 3 and 29384
+    //enc_half has 0.5*weight + the actual value
+    //enc         has weight + the actual value 
+    //gt checks both enc_first and enc_second and the weight in their anti hack checks and so on
+
+    //both give the same result, but GetValue is obviously less heavy
+    float GetValue2() {
+        return enc_first - (weight * 0.5f);
+    }
+    float GetValue() {
+        return enc_second - weight;
+    }
+
+    //this is just smth i used for my testing to make sure everythings right, gt also uses this formula to deduce hacks
+    float GetBakery() {
+       return enc_second - ((enc_first - weight * 0.5f) + weight);
+    }
+    float GetWeight() {
+        return weight;
+    }
+    void SetValue(float value) {
+        enc_second = weight + value;
+        enc_first = (weight * 0.5f) + value;
+    }
+};
+#pragma pack(pop)
+
+#pragma pack(push, 1)
 GTClass NetAvatar { //how fucking annoying it is to get align to work
    public:
     void* vtable;
@@ -20,34 +57,37 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
     void* unk0;
     byte unk1;
     byte facing_left;
-    char unk2[106];
+    char pad[30];
+    EncryptedFloat punch_drag; //investigate what uses this has and what is it used for, etc
+    char pad1a[24];
+    std::string unkstr4;
+    float unk3a;
     float unk3;
     uint32_t unk4;
     bool unk5;
     char unk02[15];
-    float velocity_x;
-    char unk03[8];
-    float impulse_x;
-    char unk6[24];
+    EncryptedFloat velocity_x;
+    EncryptedFloat velocity_y;
+    char unk6[8];
     int emotion;
     char unk7[8];
     void* NetControllerLocal; //280
     void* AvatarPacketReceiver;
     void* AvatarPacketSender;
-    char unk8[148];
-    float gravity;
-    float gravity_unused;
-    char unk9[4];
-    float gravity_verify;
-    float accel;
-    float accel_unused;
-    float accel_second;
-    float accel_verify;
-    float speed;
-    float speed_unused;
-    float speed_second;
-    float speed_verify;
-    char unk10[140];
+    char unk7b[32];
+    std::string country;
+    char unk8[84];
+    EncryptedFloat gravity;
+    EncryptedFloat accel;
+    EncryptedFloat speed;
+    float water_speed;
+    int unk_smth;
+    EncryptedFloat punch_strength; //the one which dragon and etc increases
+    int unk50;
+    std::string unkstr1; //these get set by NetAvatar::OnWepSfx
+    std::string unkstr2;
+    std::string unkstr3;
+    char unk10[16];
     int client_hack_type;   //ban report type for SendMessageT4
 
     //TODO: somehow differentiate between local and others so you can use SetPos, GetPos for other players too

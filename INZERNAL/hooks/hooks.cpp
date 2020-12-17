@@ -277,13 +277,10 @@ bool __cdecl hooks::CanSeeGhosts(int id) {
 
 void __cdecl hooks::NetAvatar_Gravity(NetAvatar* player) {
     if (opt::cheat::gravity_on) {
-        float old_grav = player->gravity;
-        float old_grav_ver = player->gravity_verify;
-        player->gravity = opt::cheat::gravity_val * 2;
-        player->gravity_verify = opt::cheat::gravity_val * 2;
+        auto backup = player->gravity.GetValue();
+        player->gravity.SetValue(opt::cheat::gravity_val);
         orig::NetAvatar_Gravity(player);
-        player->gravity = old_grav;
-        player->gravity_verify = old_grav_ver;
+        player->gravity.SetValue(backup);
     }
     else
         orig::NetAvatar_Gravity(player);
@@ -293,13 +290,12 @@ void __cdecl hooks::ProcessAcceleration(NetAvatar* player, float speed) {
     orig::ProcessAcceleration(player, speed);
     if (opt::cheat::movespeed_on) {
         if (speed != 0.f) {
-            if ((opt::cheat::movespeed_start || (!opt::cheat::movespeed_start && fabsf(player->velocity_x - player->impulse_x * 0.5f) >= 250.f))) {
-                player->velocity_x -= (player->velocity_x - player->impulse_x * 0.5f);
-                player->velocity_x += speed > 0.f ? opt::cheat::movespeed_val : -opt::cheat::movespeed_val;
+            if ((opt::cheat::movespeed_start || (!opt::cheat::movespeed_start && fabsf(player->velocity_x.GetValue()) >= 250.f))) {
+                player->velocity_x.SetValue(speed > 0.f ? opt::cheat::movespeed_val : -opt::cheat::movespeed_val);
             }
         }
         else if (opt::cheat::movespeed_stop)
-            player->velocity_x -= (player->velocity_x - player->impulse_x * 0.5f);
+            player->velocity_x.SetValue(0.f);
     }
 }
 
