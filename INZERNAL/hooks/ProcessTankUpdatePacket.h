@@ -15,6 +15,19 @@ class ProcessTankUpdatePacketHook {
         auto local = sdk::GetGameLogic()->GetLocalPlayer();
         switch (packet->type) {
             case PACKET_CALL_FUNCTION: {
+                variantlist_t varlist{};
+                auto extended = utils::get_extended(packet);
+                if (varlist.serialize_from_mem(extended)) {
+                    auto head = varlist.get(0);
+                    if (opt::bypass_dat && head.get_type() == variant_t::vartype_t::TYPE_STRING && head.get_string().find("OnSuperMain") != -1) {
+                        varlist.get(1).set(2260125218u);
+                        uint32_t data_size = 0;
+                        void* data = varlist.serialize_to_mem(&data_size, extended);
+                        printf("should have corrected OnSuperMain items.dat hash to our own\n");
+                        break;
+                    }
+                }
+
                 if (logging::enabled && logging::console & logging::callfunction) {
                     variantlist_t varlist{};
                     if (varlist.serialize_from_mem(utils::get_extended(packet))) {
@@ -24,6 +37,10 @@ class ProcessTankUpdatePacketHook {
                 }
             } break;
 
+            case PACKET_SEND_ITEM_DATABASE_DATA: {
+                if (opt::bypass_dat)
+                    return;
+            } break;
             case PACKET_SET_CHARACTER_STATE: {
                 if (!local)
                     break;

@@ -19,9 +19,11 @@ namespace logging {
 //options
 namespace opt {
 
+
+	bool		bypass_dat	=	true;		//lets us temporarily forcefully not update our items.dat
 	//enhanchements 
 	float		fps_limit	=	144.0f;		//fps limit gets forced to this
-	float		gt_version	=	3.50f;		//gt version gets spoofed to this
+	float		gt_version	=	3.51f;		//gt version gets spoofed to this
 	bool		tp_click	=	true;		//when on, holding CTRL allows you to tp to mouse location.
 	bool		mod_zoom	=	true;		//unlimited zoom. Cant ban you. cant punch further, only view. NOTE: If for some reason you can punch further, re-join.
 	bool		see_ghosts	=	true;		//allows you to see ghosts so you can avoid constant slime
