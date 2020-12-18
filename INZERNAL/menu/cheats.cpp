@@ -37,35 +37,37 @@ void menu::cheats_tab() {
             ImGui::EndChild();
         }
     }
-    if (ImGui::CollapsingHeader("Acceleration changer")) {
-        if (ImGui::BeginChild("###accelchanger", AUTOSIZE(2), true)) {
-            static bool enabled = false;
-            static float accel = 1200.f;
-            ImGui::Checkbox("Enabled###accel", &enabled);
-            ImGui::SameLine();
-            if (ImGui::SliderFloat("###accel", &accel, 100.f, 4400.f, "%0.0f") && enabled) {
-                float target = accel;
-            /*    float temp = local->accel_verify;
-                local->accel_second = temp + target;
-                local->accel = temp * 0.5f + target;*/
-            }
-            ImGui::EndChild();
-        }
-    }
+    //commented for now because going to be overhauling the changers soon anyways
 
-    if (ImGui::CollapsingHeader("Move speed changer 2")) {
-        if (ImGui::BeginChild("###accelchanger2", AUTOSIZE(2), true)) {
-            static bool enabled = false;
-            static float accel = 250.f;
-            ImGui::Checkbox("Enabled###accel2", &enabled);
-            ImGui::SameLine();
-            if (ImGui::SliderFloat("###accel2", &accel, 100.f, 1000.f, "%0.0f") && enabled) {
-                float target = accel;
-           /*     float temp = local->speed_verify;
-                local->speed_second = temp + target;
-                local->speed = temp * 0.5f + target;*/
-            }
-            ImGui::EndChild();
-        }
-    }
+    //if (ImGui::CollapsingHeader("Acceleration changer")) {
+    //    if (ImGui::BeginChild("###accelchanger", AUTOSIZE(2), true)) {
+    //        static bool enabled = false;
+    //        static float accel = 1200.f;
+    //        ImGui::Checkbox("Enabled###accel", &enabled);
+    //        ImGui::SameLine();
+    //        if (ImGui::SliderFloat("###accel", &accel, 100.f, 4400.f, "%0.0f") && enabled) {
+    //            float target = accel;
+    //            /*    float temp = local->accel_verify;
+    //            local->accel_second = temp + target;
+    //            local->accel = temp * 0.5f + target;*/
+    //        }
+    //        ImGui::EndChild();
+    //    }
+    //}
+
+    //if (ImGui::CollapsingHeader("Move speed changer 2")) {
+    //    if (ImGui::BeginChild("###accelchanger2", AUTOSIZE(2), true)) {
+    //        static bool enabled = false;
+    //        static float accel = 250.f;
+    //        ImGui::Checkbox("Enabled###accel2", &enabled);
+    //        ImGui::SameLine();
+    //        if (ImGui::SliderFloat("###accel2", &accel, 100.f, 1000.f, "%0.0f") && enabled) {
+    //            float target = accel;
+    //            /*     float temp = local->speed_verify;
+    //            local->speed_second = temp + target;
+    //            local->speed = temp * 0.5f + target;*/
+    //        }
+    //        ImGui::EndChild();
+    //    }
+    //}
 }

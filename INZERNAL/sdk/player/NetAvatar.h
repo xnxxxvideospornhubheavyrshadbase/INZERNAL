@@ -52,29 +52,38 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
     CL_Vec2f size_enc;
     std::string name;
     uint32_t netid;
-    uint32_t unk01;
+    uint32_t destroy;
     EntityComponent* entitycomponent;
     void* unk0;
     byte unk1;
     byte facing_left;
-    char pad[30];
-    EncryptedFloat punch_drag; //investigate what uses this has and what is it used for, etc
-    char pad1a[24];
-    std::string unkstr4;
-    float unk3a;
+    char pad[2];
+    void* subpixelmemory;
+    char pad0a[20];
+    EncryptedFloat punch_cooldown;
+    uint32_t skin_color;
+    char pad1a[20];
+    std::string unkstr4; //didnt find anything about this
+    float jump_progress;
     float unk3;
-    uint32_t unk4;
-    bool unk5;
-    char unk02[15];
+    uint32_t tile_x;
+    uint32_t tile_y;
+    char unk02[12];
     EncryptedFloat velocity_x;
     EncryptedFloat velocity_y;
     char unk6[8];
     int emotion;
-    char unk7[8];
+    float emotion_time;
+    char unk7[4];
     void* NetControllerLocal; //280
     void* AvatarPacketReceiver;
     void* AvatarPacketSender;
-    char unk7b[32];
+    bool jump_state;
+    char unk7a[3];
+    uint32_t flags;
+    int freeze_state;
+    int userid;
+    char unk7b[16];
     std::string country;
     char unk8[84];
     EncryptedFloat gravity;
@@ -84,7 +93,7 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
     int unk_smth;
     EncryptedFloat punch_strength; //the one which dragon and etc increases
     int unk50;
-    std::string unkstr1; //these get set by NetAvatar::OnWepSfx
+    std::string unkstr1; //these get set by NetAvatar::OnWepSfx, but i have no clue what that is either
     std::string unkstr2;
     std::string unkstr3;
     char unk10[16];
@@ -142,4 +151,3 @@ GTClass NetAvatar { //how fucking annoying it is to get align to work
     }
 };
 #pragma pack(pop)
-
