@@ -25,7 +25,7 @@ GTClass Tile{
     float opacity_maybe;
     char pad[6];
     __int16 backup_flags_maybe;
-    char pad1[61]; //to get to 128 as size (see WorldTileMap::Clear)
+    char pad1[69]; //to get to 128 as size (see WorldTileMap::Clear)
 
     //NOTE: just pushed commit for now, dont use any of these funcs or variables since rn they are outdated and brokken
     
@@ -67,5 +67,5 @@ GTClass Tile{
 #pragma pack(pop)
 
 //extremely important because we have raw std::vector in tilemap for tiles.
-static_assert(sizeof(Tile) == 128 + 8, "wrong tile size!");
+static_assert(sizeof(Tile) == 144, "wrong tile size!");
 constexpr auto tilelen = sizeof(Tile);

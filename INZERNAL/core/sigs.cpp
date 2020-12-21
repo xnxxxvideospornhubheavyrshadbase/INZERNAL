@@ -28,9 +28,8 @@ void sigs::init() {
     if (!bp) //will be invalid if ban bypass already patched, so we are doing this.
         add_pattern("gt.cpp/patch_banbypass", "00 3B C1 90 90 85 C9", sig::type::direct, 3);
 
-    add_pattern("sdk.cpp/GetGameLogic", "E8 ? ? ? ? 8b 17 ? 8d", sig::type::call);
+    add_pattern("sdk.cpp/GetGameLogic", "E8 ? ? ? ? 8b 17 ? 8d 88", sig::type::call);
     add_pattern("WorldCamera.h/WorldToScreen", "00 e8 ? ? ? ? 49 8b ? ? 41 ? 00 04", sig::type::call, 1);
-    add_pattern("GameLogic.h/GetLocalPlayer", "CC 48 8B 81 ?? ?? ?? ?? C3 CC", sig::type::direct, 1);
     add_pattern("sdk.cpp/GetClient", "E8 ? ? ? ? 45 ? ? 89 ? ? ? 48 8D ? ? 48", sig::type::call);
 
     //all hooks.cpp

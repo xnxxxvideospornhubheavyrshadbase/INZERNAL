@@ -7,7 +7,6 @@ namespace sig {
         banbypass = 0,
         gamelogic = 1,
         world2screen,
-        getlocalplayer,
         enetclient,
         app_getversion,
         baseapp_setfpslimit,

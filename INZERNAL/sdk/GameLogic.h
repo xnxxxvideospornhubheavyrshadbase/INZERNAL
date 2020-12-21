@@ -10,7 +10,7 @@ class NetAvatar;
 
 #pragma pack(push, 1)
 GTClass GameLogic {
-    char pad[304];
+    char pad[264];
     World* world;
     WorldRenderer* renderer;
     char pad2[128];
@@ -19,10 +19,8 @@ GTClass GameLogic {
    public:
     //TODO: populate gamelogiccomponent
 
-    //this func just gets same member as in struct - in 2.45 that is; position in struct is unureliable so using func
     NetAvatar* GetLocalPlayer() {
-        static auto ptr = types::GetLocalPlayer(sigs::get(sig::getlocalplayer));
-        return ptr(this);
+        return local;
     }
 
      //render + tilemap offsets have not changed since 2.996, probably safe to use struct

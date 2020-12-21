@@ -68,7 +68,6 @@ namespace types {
 	//other functions, not hooked
 	using	WorldToScreen				= void(__cdecl*)(WorldCamera*, CL_Vec2f&, CL_Vec2f&);
 	using	OnDataConfig				= void(__cdecl*)(NetAvatar*, variantlist_t*);
-	using	GetLocalPlayer				= NetAvatar*(__cdecl*)(GameLogic*);
 }
 
 enum WinSpoof {

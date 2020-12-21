@@ -41,9 +41,9 @@ void menu::enhancements_tab() {
     ImGui::NextColumn();
 
     ImGui::Checkbox("Spoof login info", &opt::spoof_login);
-    if (imwrap::checkbox("Use Alt Server", opt::alt_server, "Always uses the alternative server, which fixes the issues of freezing upon logon")) {
-        *(bool*)((uintptr_t)global::gt + 0x5EA071) = opt::alt_server; //very ghetto, but theres no way to sig this
-    }
+    //if (imwrap::checkbox("Use Alt Server", opt::alt_server, "Always uses the alternative server, which fixes the issues of freezing upon logon")) {
+    //    *(bool*)((uintptr_t)global::gt + 0x5EA071) = opt::alt_server; //very ghetto, but theres no way to sig this
+    //}
     ImGui::EndColumns();
 
 }

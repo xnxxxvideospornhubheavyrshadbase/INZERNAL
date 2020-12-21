@@ -59,11 +59,11 @@ void hooks::init() {
         pD3D->Release();
         return;
     }
+
     auto vtable = *reinterpret_cast<void***>(device);
     //releasing device fucks up vtable if loading with patcher so removed that part.
 
     // clang-format off
-
 
 	auto
 		App_GetVersion                  = sigs::get(sig::app_getversion),
@@ -104,9 +104,9 @@ void hooks::init() {
 	orig::wndproc = WNDPROC(SetWindowLongPtrW(global::hwnd, -4, LONG_PTR(WndProc)));
 
     // clang-format on
-    
-    
-    *(bool*)((uintptr_t)global::gt + 0x5EA071) = opt::alt_server;
+
+    //TODO - update alt server shit
+    //*(bool*)((uintptr_t)global::gt + 0x5EA071) = opt::alt_server;
 
     MH_EnableHook(MH_ALL_HOOKS);
     utils::printc("93", "Hooks have been setup!");
@@ -162,7 +162,7 @@ int __cdecl hooks::LogMsg(const char* msg, ...) {
     va_end(va);
 
     if (len < 90 && len > 2) {
-         if (logging::enabled && logging::console & logging::logmsg)
+        if (logging::enabled && logging::console & logging::logmsg)
             utils::printc("88", "LogMsg\t%s", buf);
     }
     return orig::LogMsg(buf);
@@ -301,8 +301,8 @@ void __cdecl hooks::ProcessAcceleration(NetAvatar* player, float speed) {
 
 void __cdecl hooks::NetHTTP_Update(NetHTTP* http) {
     if (http->m_serverName.find("iap-mob.ubi.com") != -1) //block ubisoft iap http spam shit.
-       return;
-    
+        return;
+
     //we dont know if its gt1 or gt2, so lets just do both, fuck the performance.
     if (opt::custom_server_on && http->m_serverName.find("growtopia") != -1) {
         utils::replace(http->m_serverName, "growtopia2.com", opt::custom_server_val);
