@@ -19,8 +19,6 @@ namespace logging {
 //options
 namespace opt {
 
-
-	bool		bypass_dat	=	true;		//lets us temporarily forcefully not update our items.dat
 	//enhanchements 
 	float		fps_limit	=	144.0f;		//fps limit gets forced to this
 	float		gt_version	=	3.51f;		//gt version gets spoofed to this

@@ -114,8 +114,6 @@ namespace logging {
 
 namespace opt {
 	
-	extern bool			bypass_dat;
-
 	extern float		gt_version;
 	extern float		fps_limit;
 	extern bool			tp_click;
