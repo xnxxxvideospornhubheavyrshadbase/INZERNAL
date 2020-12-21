@@ -5,7 +5,7 @@
 #pragma pack(push, 1)
 GTClass ENetClient {
    public:
-    char unk0[192];
+    char unk0[160];
     ENetHost* host;
     ENetPeer* peer;
     int connection_timer;
