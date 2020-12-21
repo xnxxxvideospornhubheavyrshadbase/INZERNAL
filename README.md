@@ -4,15 +4,6 @@
 
 # 
 
-#### V3.51 hotfix
-* Basically V3.51 updated iteminfo in items.dat, so it would crash while logging in with V3.45
-* I just used my items.dat editor to add capability  to load new items.dat version, then downgraded it, saved items.dat, and sent this with project
-* The items.dat you need is [here](https://github.com/ama6nen/INZERNAL/tree/main/gt)
-* Hotfix dll download: [here](https://github.com/ama6nen/INZERNAL/releases/tag/V0.4b)
-* Im just replacing the hash of items.dat in OnSuperMainLogon with the hash of the modified items.dat, so gt always thinks we have newest version
-* I will properly update to V3.51 when I have time, but updating offsets and sigs will take some time at the very least
-
-
 #### Features
 * Currently adding more, see code for yourself.
 
@@ -56,10 +47,10 @@
 
 ### Verified compatible Growtopia versions
 * Some patterns might be outdated for some versions
-* For now going to stick to **V3.45** with spoofing to latest version, I suggest using the
+* For now going to stick to **V3.51** with spoofing to latest version, I suggest using the
 * Find version binaries [here](https://github.com/ama6nen/INZERNAL/tree/main/gt)
 * Verified working Growtopia versions are
-  * V3.45 (Recommended version)
+  * V3.51 (Recommended version)
 
 # 
 
